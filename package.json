@@ -1,0 +1,29 @@
+{
+  "name": "codemirror-6-experiments",
+  "version": "1.0.0",
+  "description": "Experiments.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datavis-tech/codemirror-6-experiments.git"
+  },
+  "keywords": [
+    "CodeMirror"
+  ],
+  "author": "Curran Kelleher",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/datavis-tech/codemirror-6-experiments/issues"
+  },
+  "homepage": "https://github.com/datavis-tech/codemirror-6-experiments#readme",
+  "devDependencies": {
+    "rollup": "^0.66.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-typescript2": "^0.17.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.3"
+  }
+}
