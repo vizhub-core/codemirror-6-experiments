@@ -1,9 +1,9 @@
 import {
+  history,
   EditorState,
   EditorSelection
   EditorView,
   keymap,
-  history, redo, redoSelection, undo, undoSelection,
   gutter,
   baseKeymap,
   legacyMode,
@@ -12,19 +12,11 @@ import {
   specialChars,
   multipleSelections
 } from './codemirror';
+import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
 import { experimentPlugin } from './experimentPlugin';
 
-const historyKeymap = {
-  "Mod-z": undo,
-  "Mod-Shift-z": redo,
-  "Mod-u": view => undoSelection(view) || true,
-  [isMac ? "Mod-Shift-u" : "Alt-u"]: redoSelection,
-  "Ctrl-y": isMac ? undefined : redo
-};
-
 let mode = legacyMode(javascript({indentUnit: 2}, {}))
-let isMac = /Mac/.test(navigator.platform)
 let state = EditorState.create({doc: `"use strict";
 const {readFile} = require("fs");
 
@@ -37,7 +29,7 @@ readFile("package.json", "utf8", (err, data) => {
   multipleSelections(),
   mode,
   matchBrackets({decorationsPlugin: mode}),
-  keymap(historyKeymap),
+  keymap(historyKeymap()),
   keymap(indentationKeymap(mode)),
   keymap(baseKeymap),
   experimentPlugin
