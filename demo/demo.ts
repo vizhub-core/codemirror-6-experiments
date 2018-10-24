@@ -12,8 +12,8 @@ import {
   specialChars,
   multipleSelections
 } from './codemirror';
-
 import { indentationKeymap } from './indentationKeymap';
+import { experimentPlugin } from './experimentPlugin';
 
 const historyKeymap = {
   "Mod-z": undo,
@@ -39,7 +39,8 @@ readFile("package.json", "utf8", (err, data) => {
   matchBrackets({decorationsPlugin: mode}),
   keymap(historyKeymap),
   keymap(indentationKeymap(mode)),
-  keymap(baseKeymap)
+  keymap(baseKeymap),
+  experimentPlugin
 ]})
 
 let view = (window as any).view = new EditorView(state)
