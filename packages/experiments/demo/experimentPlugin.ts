@@ -1,4 +1,9 @@
-import { Plugin, EditorView, EditorState, Transaction } from './codemirror';
+import {
+  Plugin,
+  EditorView,
+  EditorState,
+  Transaction
+} from 'codemirror-6';
 
 export const experimentPlugin = new Plugin({
   view: (view: EditorView) => {
