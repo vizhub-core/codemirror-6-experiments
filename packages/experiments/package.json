@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "codemirror-theme-ubuntu": "1",
-    "codemirror-6": "1"
+    "codemirror-6": "1",
+    "codemirror-ot": "1"
   }
 }

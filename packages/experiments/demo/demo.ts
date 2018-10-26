@@ -16,6 +16,7 @@ import {
 import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
 import { experimentPlugin } from './experimentPlugin';
+import { ot } from 'codemirror-ot';
 
 let mode = legacyMode(javascript({indentUnit: 2}, {}))
 let state = EditorState.create({doc: `"use strict";
@@ -33,7 +34,8 @@ readFile("package.json", "utf8", (err, data) => {
   keymap(historyKeymap()),
   keymap(indentationKeymap(mode)),
   keymap(baseKeymap),
-  experimentPlugin
+  experimentPlugin,
+  ot
 ]})
 
 let view = (window as any).view = new EditorView(state)
