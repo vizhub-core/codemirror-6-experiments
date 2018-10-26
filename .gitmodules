@@ -1,5 +1,5 @@
 [submodule "codemirror.next"]
-	path = packages/experiments/codemirror.next
+	path = packages/codemirror-6/codemirror.next
 	url = git@github.com:codemirror/codemirror.next.git
 [submodule "codemirror-theme-ubuntu"]
 	path = packages/codemirror-theme-ubuntu

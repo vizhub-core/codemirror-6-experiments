@@ -3,7 +3,7 @@ import {
   redoSelection,
   undo,
   undoSelection
-} from './codemirror';
+} from 'codemirror-6';
 
 export const historyKeymap = () => {
   let isMac = /Mac/.test(navigator.platform);
