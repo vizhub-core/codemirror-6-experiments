@@ -8,9 +8,8 @@ export {matchBrackets} from "./codemirror.next/matchbrackets/src/matchbrackets"
 export {specialChars} from "./codemirror.next/special-chars/src/special-chars"
 export {multipleSelections} from "./codemirror.next/multiple-selections/src/multiple-selections"
 
-import * as javascript from "./codemirror.next/legacy-modes/src/javascript"
+export {legacyMode} from "./codemirror.next/legacy-modes/src/index"
+
+import javascript from "./codemirror.next/legacy-modes/src/javascript"
 export {javascript}
 
-//import {legacyMode} from "./codemirror.next/legacy-modes/src/index"
-const legacyMode = () => {}
-export {legacyMode}

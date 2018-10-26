@@ -5,8 +5,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 export default {
   input: './codemirror.ts',
   output: {
-    format: 'umd',
-    name: 'Codemirror',
+    format: 'cjs',
     file: './dist/codemirror.js',
     sourcemap: true
   },

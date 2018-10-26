@@ -12,6 +12,7 @@ import {
   specialChars,
   multipleSelections
 } from 'codemirror-6';
+
 import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
 import { experimentPlugin } from './experimentPlugin';
