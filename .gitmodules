@@ -4,3 +4,6 @@
 [submodule "codemirror-theme-ubuntu"]
 	path = packages/codemirror-theme-ubuntu
 	url = git@github.com:datavis-tech/codemirror-theme-ubuntu.git
+[submodule "packages/codemirror-ot"]
+	path = packages/codemirror-ot
+	url = git@github.com:datavis-tech/codemirror-ot.git
