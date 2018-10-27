@@ -1,9 +1,9 @@
-[submodule "codemirror.next"]
-	path = packages/codemirror-6/codemirror.next
-	url = git@github.com:codemirror/codemirror.next.git
 [submodule "codemirror-theme-ubuntu"]
 	path = packages/codemirror-theme-ubuntu
 	url = git@github.com:datavis-tech/codemirror-theme-ubuntu.git
 [submodule "packages/codemirror-ot"]
 	path = packages/codemirror-ot
 	url = git@github.com:datavis-tech/codemirror-ot.git
+[submodule "packages/codemirror-6/codemirror.next"]
+	path = packages/codemirror-6/codemirror.next
+	url = git@github.com:curran/codemirror.next.git
