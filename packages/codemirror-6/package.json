@@ -6,11 +6,12 @@
   "types": "dist/codemirror.d.ts",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "mocha": "^5.2.0",
     "rollup": "^0.66.6",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
