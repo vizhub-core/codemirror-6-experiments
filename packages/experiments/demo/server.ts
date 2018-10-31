@@ -4,9 +4,26 @@ import * as jsdom from 'jsdom';
 import { createView } from './demoView';
 
 const { JSDOM } = jsdom;
-const html = '<!DOCTYPE html><div id="editor"></div>'
+const html = `
+  <!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>CM6 demo</title>
+      <link rel="stylesheet" href="../node_modules/codemirror-6/codemirror.next/view/style/editorview.css">
+      <link rel="stylesheet" href="../node_modules/codemirror-theme-ubuntu/codemirror-ubuntu-theme.css">
+      <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+      <div style="" id="editor"></div>
+    </body>
+  </html>
+`;
+console.log('new');
 
-const document = new JSDOM(html).window.document;
+const dom = new JSDOM(html);
+const document = dom.window.document;
 //const documentAny: any = documentJSDOM;
 //const document: HTMLElement = documentAny;
 document.getSelection = () => ({}) as Selection;
@@ -28,7 +45,7 @@ document.querySelector("#editor").appendChild(view.dom)
 const router: Router = Router();
 
 router.get('/', (req: Request, res: Response) => {
-  const html = document.body.outerHTML;
+  const html = dom.serialize();
   res.send(html);
 });
 
