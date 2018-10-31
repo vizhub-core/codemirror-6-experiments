@@ -1,4 +1,4 @@
-export {EditorSelection, Plugin, EditorState, Transaction, Change} from "./codemirror.next/state/src"
+export {EditorSelection, Plugin,StateField, EditorState, Transaction, Change} from "./codemirror.next/state/src"
 export {EditorView} from "./codemirror.next/view/src/"
 export {keymap} from "./codemirror.next/keymap/src/keymap"
 export {history, redo, redoSelection, undo, undoSelection} from "./codemirror.next/history/src/history"

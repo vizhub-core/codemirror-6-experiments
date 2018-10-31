@@ -4,6 +4,9 @@
 [submodule "packages/codemirror-ot"]
 	path = packages/codemirror-ot
 	url = git@github.com:datavis-tech/codemirror-ot.git
+[submodule "packages/codemirror-6/--force"]
+	path = packages/codemirror-6/--force
+	url = git@github.com:codemirror/codemirror.next.git
 [submodule "packages/codemirror-6/codemirror.next"]
 	path = packages/codemirror-6/codemirror.next
-	url = git@github.com:curran/codemirror.next.git
+	url = git@github.com:codemirror/codemirror.next.git
