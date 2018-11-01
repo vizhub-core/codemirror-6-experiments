@@ -14,17 +14,17 @@ import {
 
 import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
-import { experimentPlugin } from './experimentPlugin';
+//import { experimentPlugin } from './experimentPlugin';
 //import { ot } from 'codemirror-ot';
 
 export const createView = () => {
   let mode = legacyMode(javascript({indentUnit: 2}, {}))
   let state = EditorState.create({doc: `"use strict";
-  const {readFile} = require("fs");
+const {readFile} = require("fs");
 
-  readFile("package.json", "utf8", (err, data) => {
-    console.log(data);
-  });`, plugins: [
+readFile("package.json", "utf8", (err, data) => {
+  console.log(data);
+});`, plugins: [
     gutter(),
     history(),
     specialChars({}),
@@ -33,8 +33,8 @@ export const createView = () => {
     matchBrackets({decorationsPlugin: mode}),
     keymap(historyKeymap()),
     keymap(indentationKeymap(mode)),
-    keymap(baseKeymap),
-    experimentPlugin
+    keymap(baseKeymap)
+    //experimentPlugin
     //ot
   ]})
 
