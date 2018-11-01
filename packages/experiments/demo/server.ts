@@ -11,12 +11,10 @@ const html = `
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>CM6 demo</title>
-      <link rel="stylesheet" href="../node_modules/codemirror-6/codemirror.next/view/style/editorview.css">
-      <link rel="stylesheet" href="../node_modules/codemirror-theme-ubuntu/codemirror-ubuntu-theme.css">
-      <link rel="stylesheet" href="./styles.css">
     </head>
     <body>
-      <div style="" id="editor"></div>
+      <div id="editor"></div>
+      <script src="./build/demo_built.js"></script>
     </body>
   </html>
 `;
@@ -50,6 +48,7 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 const app: Application = express();
+app.use('/build', express.static('demo/build'));
 const port: number = 3000;
 app.use('/', router);
 
