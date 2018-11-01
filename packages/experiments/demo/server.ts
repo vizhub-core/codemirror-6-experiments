@@ -32,12 +32,9 @@ const html = `
     </body>
   </html>
 `;
-console.log('new');
 
 const dom = new JSDOM(html);
 const document = dom.window.document;
-//const documentAny: any = documentJSDOM;
-//const document: HTMLElement = documentAny;
 document.getSelection = () => ({}) as Selection;
 const globalAny:any = global;
 globalAny.document = document;
@@ -52,7 +49,7 @@ globalAny.MutationObserver = () => ({
 });
 globalAny.requestAnimationFrame = () => {};
 const view = createView();
-document.querySelector("#editor").appendChild(view.dom)
+document.querySelector("#editor").appendChild(view.dom);
 
 const router: Router = Router();
 
