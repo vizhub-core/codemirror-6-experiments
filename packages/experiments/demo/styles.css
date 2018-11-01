@@ -13,9 +13,3 @@ body {
 .CodeMirror {
   overflow: auto;
 }
-.CodeMirror .CodeMirror-matchingbracket {
-  color: #0b0;
-}
-.CodeMirror .CodeMirror-nonmatchingbracket {
-  color: #a22;
-}

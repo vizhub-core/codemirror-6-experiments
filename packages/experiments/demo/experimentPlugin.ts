@@ -22,5 +22,5 @@ export const experimentPlugin = new Plugin({
         console.log(trs);
       }
     };
-  })
+  }
 });
