@@ -16,9 +16,14 @@ import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
 import { otPlugin } from 'codemirror-ot';
 
-export const createView = (path=[], emitOps=() => {}) => {
-  let mode = legacyMode(javascript({indentUnit: 2}, {}))
-  let state = EditorState.create({doc: `"use strict";
+export const createView = options => {
+  const {
+    path = [],
+    emitOps = () => {}
+  } = options || {};
+
+  const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
+  const state = EditorState.create({ doc: `"use strict";
 const {readFile} = require("fs");
 
 readFile("package.json", "utf8", (err, data) => {
