@@ -1,7 +1,12 @@
 import * as express  from 'express';
 import { Application, Router, Request, Response } from 'express';
 import * as jsdom from 'jsdom';
-import { createView } from './demoView';
+import { createView } from '../demoView';
+
+//import * as http = require('http');
+//import * as ShareDB = require('sharedb');
+//import * as WebSocket = require('ws');
+//import * as WebSocketJSONStream = require('websocket-json-stream');
 
 const { JSDOM } = jsdom;
 const html = `
