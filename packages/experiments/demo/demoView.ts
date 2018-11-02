@@ -14,10 +14,9 @@ import {
 
 import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
-//import { experimentPlugin } from './experimentPlugin';
-//import { ot } from 'codemirror-ot';
+import { otPlugin } from 'codemirror-ot';
 
-export const createView = () => {
+export const createView = (path=[], emitOps=() => {}) => {
   let mode = legacyMode(javascript({indentUnit: 2}, {}))
   let state = EditorState.create({doc: `"use strict";
 const {readFile} = require("fs");
@@ -33,9 +32,8 @@ readFile("package.json", "utf8", (err, data) => {
     matchBrackets({decorationsPlugin: mode}),
     keymap(historyKeymap()),
     keymap(indentationKeymap(mode)),
-    keymap(baseKeymap)
-    //experimentPlugin
-    //ot
+    keymap(baseKeymap),
+    otPlugin(path, emitOps)
   ]})
 
   return new EditorView(state)
