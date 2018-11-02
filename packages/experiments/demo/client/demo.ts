@@ -1,5 +1,5 @@
 import * as ShareDB from 'sharedb/lib/client';
-import * as WebSocket from 'reconnecting-websocket';
+import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
 import 'codemirror-6/codemirror.next/view/style/editorview.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
