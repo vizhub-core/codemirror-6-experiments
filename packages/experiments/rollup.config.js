@@ -2,9 +2,11 @@ import typescript from 'rollup-plugin-typescript2'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import builtins from 'rollup-plugin-node-builtins'
+import globals from 'rollup-plugin-node-globals'
 
 export default {
-  input: './demo/demo.ts',
+  input: './demo/client/demo.ts',
   output: {
     format: 'umd',
     file: './demo/build/demo_built.js',
@@ -12,6 +14,12 @@ export default {
   },
   plugins: [
     nodeResolve(),
+    commonjs(),
+
+    // Required for ShareDB client to build and run.
+    builtins(),
+    globals(),
+
     typescript({
       check: false,
       tsconfigOverride: {
@@ -24,9 +32,6 @@ export default {
         include: null
       }
     }),
-    commonjs(),
-    postcss({
-      plugins: []
-    })
+    postcss()
   ]
 }

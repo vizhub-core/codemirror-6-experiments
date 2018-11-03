@@ -14,17 +14,24 @@ import {
 
 import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
-//import { experimentPlugin } from './experimentPlugin';
-//import { ot } from 'codemirror-ot';
+import { otPlugin } from 'codemirror-ot';
 
-export const createView = () => {
-  let mode = legacyMode(javascript({indentUnit: 2}, {}))
-  let state = EditorState.create({doc: `"use strict";
-const {readFile} = require("fs");
+export const createView = options => {
+  const {
+    path = [],
+    emitOps = () => {}
+  } = options;
 
-readFile("package.json", "utf8", (err, data) => {
-  console.log(data);
-});`, plugins: [
+  // TODO init doc from ShareDB data.
+  // const doc = `"use strict";
+  // const {readFile} = require("fs");
+
+  // readFile("package.json", "utf8", (err, data) => {
+  //   console.log(data);
+  // });`
+
+  const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
+  const state = EditorState.create({ doc: '', plugins: [
     gutter(),
     history(),
     specialChars({}),
@@ -33,10 +40,10 @@ readFile("package.json", "utf8", (err, data) => {
     matchBrackets({decorationsPlugin: mode}),
     keymap(historyKeymap()),
     keymap(indentationKeymap(mode)),
-    keymap(baseKeymap)
-    //experimentPlugin
-    //ot
+    keymap(baseKeymap),
+    otPlugin(path, emitOps)
   ]})
 
-  return new EditorView(state)
+  const view = new EditorView(state);
+  return view;
 };
