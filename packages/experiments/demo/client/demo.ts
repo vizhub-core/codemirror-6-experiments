@@ -19,8 +19,6 @@ doc.subscribe(err => {
   let applyingOpTransaction = false;
   const path = [];
   const emitOps = ops => {
-    console.log(ops);
-    console.log({applyingOpTransaction});
     if (!applyingOpTransaction) {
       doc.submitOp(ops);
     }

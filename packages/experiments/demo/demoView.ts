@@ -22,13 +22,16 @@ export const createView = options => {
     emitOps = () => {}
   } = options;
 
-  const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
-  const state = EditorState.create({ doc: `"use strict";
-const {readFile} = require("fs");
+  // TODO init doc from ShareDB data.
+  // const doc = `"use strict";
+  // const {readFile} = require("fs");
 
-readFile("package.json", "utf8", (err, data) => {
-  console.log(data);
-});`, plugins: [
+  // readFile("package.json", "utf8", (err, data) => {
+  //   console.log(data);
+  // });`
+
+  const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
+  const state = EditorState.create({ doc: '', plugins: [
     gutter(),
     history(),
     specialChars({}),
