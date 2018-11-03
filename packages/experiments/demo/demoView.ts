@@ -20,7 +20,7 @@ export const createView = options => {
   const {
     path = [],
     emitOps = () => {}
-  } = options || {};
+  } = options;
 
   const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
   const state = EditorState.create({ doc: `"use strict";
@@ -41,5 +41,6 @@ readFile("package.json", "utf8", (err, data) => {
     otPlugin(path, emitOps)
   ]})
 
-  return new EditorView(state)
+  const view = new EditorView(state);
+  return view;
 };

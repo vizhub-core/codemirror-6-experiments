@@ -71,7 +71,7 @@ globalAny.MutationObserver = () => ({
   disconnect: () => {}
 });
 globalAny.requestAnimationFrame = () => {};
-const view = createView();
+const view = createView({});
 document.querySelector("#editor").appendChild(view.dom);
 
 function startServer() {
