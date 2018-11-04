@@ -10,6 +10,7 @@ export const html = `
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>CM6 demo</title>
       <style>${criticalCSS}</style>
+      <script id="server-rendered-data"></script>
     </head>
     <body>
       <div id="editor"></div>
