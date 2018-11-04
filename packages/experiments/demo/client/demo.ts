@@ -2,9 +2,10 @@ import * as ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
 import { opsToTransaction } from 'codemirror-ot';
-import 'codemirror-6/codemirror.next/view/style/editorview.css';
+
+import '../editorview.css';
+import '../styles.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
-import './styles.css';
 
 const socket = new WebSocket('ws://' + window.location.host, [], {
 
