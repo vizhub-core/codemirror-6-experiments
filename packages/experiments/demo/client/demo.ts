@@ -19,29 +19,28 @@ const socket = new WebSocket('ws://' + window.location.host, [], {
 const connection = new ShareDB.Connection(socket);
 
 const doc = connection.get('examples', 'textarea');
-
-// const before = Date.now();
-
-doc.subscribe(err => {
+doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
   if (err) {
-    throw err;
+    console.log(err);
   }
-
-  // const after = Date.now();
-  // console.log('subscribe took ' + (after - before) / 1000 + 'seconds');
 
   let applyingOpTransaction = false;
   const path = [];
   const emitOps = ops => {
     if (!applyingOpTransaction) {
-      doc.submitOp(ops);
+      doc.submitOp(ops, err => {
+        if (err) {
+          throw err;
+        }
+      });
     }
   }
-
-  // TODO init ShareDB document instead.
-  const text = window.serverRenderedData;
-
-  const view = createView({ path, emitOps, text });
+  const text = doc.data;
+  const view = createView({
+    path,
+    emitOps, // TODO handle the case of typing before subscribe finished
+    text
+  });
 
   hydrateEditor(view);
 
@@ -53,4 +52,14 @@ doc.subscribe(err => {
       applyingOpTransaction = false;
     }
   });
+
+  setTimeout(() => {
+    console.log('subscribing');
+    doc.subscribe(err => {
+      // TODO handle the case of typing before subscribe finished
+      if (err) {
+        throw err;
+      }
+    });
+  }, 4000);
 });

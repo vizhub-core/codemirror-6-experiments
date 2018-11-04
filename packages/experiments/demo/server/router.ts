@@ -16,8 +16,13 @@ export const createRouter = connection => {
       const text = doc.data;
       hydrateEditor(createView({ text }));
 
+      const snapshot = {
+        v: doc.version,
+        data: doc.data
+      };
+
       document.querySelector('#server-rendered-data')
-        .textContent = `window.serverRenderedData = \`${text}\`;`;
+        .textContent = `window.serverRenderedData = { snapshot:${JSON.stringify(snapshot)}};`;
 
       res.send(dom.serialize());
       doc.destroy();
