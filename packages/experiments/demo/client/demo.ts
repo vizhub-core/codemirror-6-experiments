@@ -1,7 +1,7 @@
 import * as ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
-import { hydrateEditor } from './hydrateEditor';
+import { hydrateEditor } from '../hydrateEditor';
 import { opsToTransaction } from 'codemirror-ot';
 
 import '../css/noncritical.css';
