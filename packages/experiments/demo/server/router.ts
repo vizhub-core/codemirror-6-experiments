@@ -1,11 +1,17 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { createView } from '../demoView';
 import { dom } from './dom';
 import { hydrateEditor } from '../hydrateEditor';
-export const router: Router = Router();
+import { getOrCreateDoc } from './getOrCreateDoc';
 
-router.get('/', (req: Request, res: Response) => {
-  const view = createView({});
-  hydrateEditor(view);
-  res.send(dom.serialize());
-});
+export const createRouter = connection => {
+  const router = Router();
+  router.get('/', (req, res) => {
+    getOrCreateDoc(connection).then((doc: any) => {
+      hydrateEditor(createView({ text: doc.data }));
+      res.send(dom.serialize());
+      doc.destroy();
+    });
+  });
+  return router;
+};

@@ -20,7 +20,8 @@ import { isBrowser } from './isBrowser';
 export const createView = options => {
   const {
     path = [],
-    emitOps = () => {}
+    emitOps = () => {},
+    text = ''
   } = options;
 
   // TODO init doc from ShareDB data.
@@ -52,7 +53,7 @@ export const createView = options => {
   }
 
   const state = EditorState.create({
-    doc: '',
+    doc: text,
     plugins: [
       gutter(),
       history(),
