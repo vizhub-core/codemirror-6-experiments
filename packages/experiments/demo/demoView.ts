@@ -11,10 +11,11 @@ import {
   specialChars,
   multipleSelections
 } from 'codemirror-6';
+import { otPlugin } from 'codemirror-ot';
 
 import { historyKeymap } from './historyKeymap';
 import { indentationKeymap } from './indentationKeymap';
-import { otPlugin } from 'codemirror-ot';
+import { isBrowser } from './isBrowser';
 
 export const createView = options => {
   const {
@@ -31,18 +32,40 @@ export const createView = options => {
   // });`
 
   const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
-  const state = EditorState.create({ doc: '', plugins: [
+
+  let plugins = [
     gutter(),
-    history(),
-    specialChars({}),
-    multipleSelections(),
     mode,
-    matchBrackets({decorationsPlugin: mode}),
-    keymap(historyKeymap()),
-    keymap(indentationKeymap(mode)),
-    keymap(baseKeymap),
-    otPlugin(path, emitOps)
-  ]})
+    specialChars({}),
+  ];
+
+  if (isBrowser) {
+    plugins = plugins.concat([
+      history(),
+      multipleSelections(),
+      matchBrackets({decorationsPlugin: mode}),
+      keymap(historyKeymap()),
+      keymap(indentationKeymap(mode)),
+      keymap(baseKeymap),
+      otPlugin(path, emitOps)
+    ]);
+  }
+
+  const state = EditorState.create({
+    doc: '',
+    plugins: [
+      gutter(),
+      history(),
+      specialChars({}),
+      multipleSelections(),
+      mode,
+      matchBrackets({decorationsPlugin: mode}),
+      keymap(historyKeymap()),
+      keymap(indentationKeymap(mode)),
+      keymap(baseKeymap),
+      otPlugin(path, emitOps)
+    ]
+  })
 
   const view = new EditorView(state);
   return view;
