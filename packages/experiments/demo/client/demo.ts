@@ -1,6 +1,7 @@
 import * as ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
+import { hydrateEditor } from './hydrateEditor';
 import { opsToTransaction } from 'codemirror-ot';
 
 import '../css/noncritical.css';
@@ -38,9 +39,7 @@ doc.subscribe(err => {
 
   const view = createView({ path, emitOps });
 
-  const editorDiv = document.querySelector('#editor');
-  editorDiv.innerHTML = '';
-  editorDiv.appendChild(view.dom)
+  hydrateEditor(view);
 
   doc.on('op', (op, originatedLocally) => {
     if (!originatedLocally) {
