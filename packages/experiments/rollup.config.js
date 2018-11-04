@@ -15,7 +15,8 @@ export default {
     nodeResolve(),
     commonjs(),
 
-    // Required for ShareDB client to build and run.
+    // Required for ShareDB client to build and run,
+    // because it imports EventEmitter from 'events'.
     builtins(),
 
     typescript({
