@@ -3,8 +3,7 @@ import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
 import { opsToTransaction } from 'codemirror-ot';
 
-import '../editorview.css';
-import '../styles.css';
+import '../css/noncritical.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
 
 const socket = new WebSocket('ws://' + window.location.host, [], {

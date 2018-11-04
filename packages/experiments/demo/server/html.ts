@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 
 const criticalCSS = fs.readFileSync(__dirname + '/../css/critical.css', 'utf8');
+
 export const html = `
   <!doctype html>
   <html>
