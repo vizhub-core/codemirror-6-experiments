@@ -6,15 +6,27 @@ import 'codemirror-6/codemirror.next/view/style/editorview.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
 import './styles.css';
 
-const socket = new WebSocket('ws://' + window.location.host);
+const socket = new WebSocket('ws://' + window.location.host, [], {
+
+  // This makes it connect immediately.
+  // Should not be required in future versions of reconnecting-websocket.
+  // https://github.com/pladaria/reconnecting-websocket/issues/91
+  minReconnectionDelay: 1
+});
+
 const connection = new ShareDB.Connection(socket);
 
 const doc = connection.get('examples', 'textarea');
+
+// const before = Date.now();
 
 doc.subscribe(err => {
   if (err) {
     throw err;
   }
+
+  // const after = Date.now();
+  // console.log('subscribe took ' + (after - before) / 1000 + 'seconds');
 
   let applyingOpTransaction = false;
   const path = [];
