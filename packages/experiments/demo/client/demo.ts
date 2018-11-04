@@ -1,15 +1,9 @@
-// Required for ShareDB client.
-window.process = {
-  nextTick: callback => {
-    setTimeout(callback, 0);
-  }
-};
-
 import * as ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
 import { hydrateEditor } from '../hydrateEditor';
 import { opsToTransaction } from 'codemirror-ot';
+import './shareDBPolyfills';
 
 import '../css/noncritical.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
