@@ -3,7 +3,6 @@ import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 import builtins from 'rollup-plugin-node-builtins'
-import globals from 'rollup-plugin-node-globals'
 
 export default {
   input: './demo/client/demo.ts',
@@ -18,7 +17,6 @@ export default {
 
     // Required for ShareDB client to build and run.
     builtins(),
-    globals(),
 
     typescript({
       check: false,

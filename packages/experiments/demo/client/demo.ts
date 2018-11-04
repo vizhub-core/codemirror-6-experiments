@@ -1,3 +1,10 @@
+// Required for ShareDB client.
+window.process = {
+  nextTick: callback => {
+    setTimeout(callback, 0);
+  }
+};
+
 import * as ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
 import { createView } from '../demoView';
