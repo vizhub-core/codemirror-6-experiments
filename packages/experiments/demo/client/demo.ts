@@ -38,7 +38,10 @@ doc.subscribe(err => {
     }
   }
 
-  const view = createView({ path, emitOps });
+  // TODO init ShareDB document instead.
+  const text = window.serverRenderedData;
+
+  const view = createView({ path, emitOps, text });
 
   hydrateEditor(view);
 

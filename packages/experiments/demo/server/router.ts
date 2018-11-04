@@ -17,7 +17,7 @@ export const createRouter = connection => {
       hydrateEditor(createView({ text }));
 
       document.querySelector('#server-rendered-data')
-        .textContent = `const serverRenderedData = \`${text}\`;`;
+        .textContent = `window.serverRenderedData = \`${text}\`;`;
 
       res.send(dom.serialize());
       doc.destroy();
