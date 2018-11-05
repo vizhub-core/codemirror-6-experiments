@@ -32,12 +32,11 @@ body {
 }
 
 .CodeMirror-gutter-element {
+  white-space: nowrap;
   box-sizing: border-box;
-  /* FIXME this is line number specific */
   padding: 0 3px 0 5px;
   min-width: 20px;
   text-align: right;
-  white-space: nowrap;
 }
 
 .CodeMirror-tab {

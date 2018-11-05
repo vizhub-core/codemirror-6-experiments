@@ -7,9 +7,7 @@ import {
   baseKeymap,
   legacyMode,
   matchBrackets,
-  javascript,
-  specialChars,
-  multipleSelections
+  javascript
 } from 'codemirror-6';
 import { otPlugin } from 'codemirror-ot';
 
@@ -35,15 +33,13 @@ export const createView = options => {
   const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
 
   let plugins = [
-    gutter(),
-    mode,
-    specialChars({}),
+    mode
   ];
 
   if (isBrowser) {
     plugins = plugins.concat([
+      gutter(),
       history(),
-      multipleSelections(),
       matchBrackets({decorationsPlugin: mode}),
       keymap(historyKeymap()),
       keymap(indentationKeymap(mode)),
@@ -52,22 +48,7 @@ export const createView = options => {
     ]);
   }
 
-  const state = EditorState.create({
-    doc: text,
-    plugins: [
-      gutter(),
-      history(),
-      specialChars({}),
-      multipleSelections(),
-      mode,
-      matchBrackets({decorationsPlugin: mode}),
-      keymap(historyKeymap()),
-      keymap(indentationKeymap(mode)),
-      keymap(baseKeymap),
-      otPlugin(path, emitOps)
-    ]
-  })
+  const state = EditorState.create({ doc: text, plugins })
 
-  const view = new EditorView(state);
-  return view;
+  return new EditorView(state);
 };

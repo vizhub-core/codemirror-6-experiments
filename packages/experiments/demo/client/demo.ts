@@ -41,9 +41,8 @@ doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
 
   doc.on('op', (op, originatedLocally) => {
     if (!originatedLocally) {
-      const transaction = opsToTransaction(path, view.state, op);
       applyingOpTransaction = true;
-      view.dispatch(transaction);
+      view.dispatch(opsToTransaction(path, view.state, op));
       applyingOpTransaction = false;
     }
   });
