@@ -16,6 +16,10 @@ export const createRouter = connection => {
       const text = doc.data;
       hydrateEditor(createView({ text }));
 
+      // Make the content non-interactive until the JS loads.
+      // Otherwise edits made before JS loads will be lost.
+      document.querySelector('.CodeMirror-content').removeAttribute('contenteditable');
+
       const snapshot = {
         v: doc.version,
         data: doc.data

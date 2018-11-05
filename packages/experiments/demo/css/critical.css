@@ -3,10 +3,6 @@ body {
   color: white;
 }
 
-[contenteditable="true"] {
-  pointer-events: none;
-}
-
 .CodeMirror {
   font-family: monospace;
   line-height: 1.4;

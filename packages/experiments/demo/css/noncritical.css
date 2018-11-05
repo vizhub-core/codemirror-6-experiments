@@ -1,7 +1,3 @@
-[contenteditable="true"] {
-  pointer-events: all;
-}
-
 body {
   position: fixed;
   top: 0px;
