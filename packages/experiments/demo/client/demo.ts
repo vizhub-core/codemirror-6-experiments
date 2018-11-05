@@ -36,12 +36,7 @@ doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
     }
   }
   const text = doc.data;
-  const view = createView({
-    path,
-    emitOps, // TODO handle the case of typing before subscribe finished
-    text
-  });
-
+  const view = createView({ path, emitOps, text });
   hydrateEditor(view);
 
   doc.on('op', (op, originatedLocally) => {
@@ -53,13 +48,9 @@ doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
     }
   });
 
-  setTimeout(() => {
-    console.log('subscribing');
-    doc.subscribe(err => {
-      // TODO handle the case of typing before subscribe finished
-      if (err) {
-        throw err;
-      }
-    });
-  }, 4000);
+  doc.subscribe(err => {
+    if (err) {
+      throw err;
+    }
+  });
 });

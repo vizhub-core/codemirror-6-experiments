@@ -1,12 +1,21 @@
+[contenteditable="true"] {
+  pointer-events: none;
+}
+
 body {
   background-color: #300a24;
   color: white;
   font-family: monospace;
 }
-.cm-keyword,
-.cm-comment,
-.cm-bracket,
-.cm-attribute,
-.CodeMirror-matchingbracket {
-  color: #34e2e2; /* neon blue */
+
+.CodeMirror {
+  line-height: 1.4;
+}
+
+.cm-string {
+  color: #ad7fa8;
+}
+.cm-keyword {
+  color: #34e2e2;
+  font-weight: bold;
 }
