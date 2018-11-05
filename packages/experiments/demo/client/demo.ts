@@ -8,7 +8,9 @@ import { opsToTransaction } from 'codemirror-ot';
 import '../css/noncritical.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
 
-const socket = new WebSocket('ws://' + window.location.host, [], {
+const webSocketProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+const webSocketUrl = webSocketProtocol + '//' + window.location.host;
+const socket = new WebSocket(webSocketUrl, [], {
 
   // This makes it connect immediately.
   // Should not be required in future versions of reconnecting-websocket.
