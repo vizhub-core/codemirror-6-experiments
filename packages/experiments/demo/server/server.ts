@@ -5,40 +5,22 @@ import * as ShareDB from 'sharedb';
 import * as WebSocket from 'ws';
 import * as WebSocketJSONStream from '@teamwork/websocket-json-stream';
 
-import { router } from './router';
+import { createRouter } from './router';
 
 const backend = new ShareDB();
-createDoc(startServer);
+const connection = backend.connect();
 
-function createDoc(callback) {
-  const connection = backend.connect();
-  const doc = connection.get('examples', 'textarea');
-  doc.fetch(err => {
-    if (err) {
-      throw err;
-    }
-    if (doc.type === null) {
-      doc.create('Test content', callback);
-      return;
-    }
-    callback();
-  });
-}
+const app = express();
+app.use('/', createRouter(connection));
+app.use('/build', express.static('demo/build'));
 
-function startServer() {
-  const app = express();
-  app.use('/build', express.static('demo/build'));
-  app.use('/', router);
+const server = http.createServer(app);
 
-  const server = http.createServer(app);
+const webSocketServer = new WebSocket.Server({ server });
+webSocketServer.on('connection', webSocket => {
+  backend.listen(new WebSocketJSONStream(webSocket));
+});
 
-  const wss = new WebSocket.Server({ server });
-  wss.on('connection', (ws, req) => {
-    const stream = new WebSocketJSONStream(ws);
-    backend.listen(stream);
-  });
-
-  const port: number = 3000;
-  server.listen(port);
-  console.log(`Listening at http://localhost:${port}/`);
-}
+const port: number = 3000;
+server.listen(port);
+console.log(`Listening at http://localhost:${port}/`);

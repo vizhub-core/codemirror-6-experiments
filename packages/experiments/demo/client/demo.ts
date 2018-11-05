@@ -19,35 +19,37 @@ const socket = new WebSocket('ws://' + window.location.host, [], {
 const connection = new ShareDB.Connection(socket);
 
 const doc = connection.get('examples', 'textarea');
-
-// const before = Date.now();
-
-doc.subscribe(err => {
+doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
   if (err) {
-    throw err;
+    console.log(err);
   }
-
-  // const after = Date.now();
-  // console.log('subscribe took ' + (after - before) / 1000 + 'seconds');
 
   let applyingOpTransaction = false;
   const path = [];
   const emitOps = ops => {
     if (!applyingOpTransaction) {
-      doc.submitOp(ops);
+      doc.submitOp(ops, err => {
+        if (err) {
+          throw err;
+        }
+      });
     }
   }
-
-  const view = createView({ path, emitOps });
-
+  const text = doc.data;
+  const view = createView({ path, emitOps, text });
   hydrateEditor(view);
 
   doc.on('op', (op, originatedLocally) => {
     if (!originatedLocally) {
-      const transaction = opsToTransaction(path, view.state, op);
       applyingOpTransaction = true;
-      view.dispatch(transaction);
+      view.dispatch(opsToTransaction(path, view.state, op));
       applyingOpTransaction = false;
+    }
+  });
+
+  doc.subscribe(err => {
+    if (err) {
+      throw err;
     }
   });
 });
