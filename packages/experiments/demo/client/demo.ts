@@ -9,7 +9,7 @@ import '../css/noncritical.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
 
 const webSocketProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-const webSocketUrl = wsProtocol + '//' + window.location.host;
+const webSocketUrl = webSocketProtocol + '//' + window.location.host;
 const socket = new WebSocket(webSocketUrl, [], {
 
   // This makes it connect immediately.
