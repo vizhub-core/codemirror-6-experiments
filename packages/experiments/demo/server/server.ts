@@ -7,7 +7,13 @@ import * as WebSocketJSONStream from '@teamwork/websocket-json-stream';
 
 import { createRouter } from './router';
 
-const backend = new ShareDB();
+const backend = new ShareDB({
+
+  // The following options serve only to squelch errors.
+  // It should be possible to remove these when ShareDB 1.0 is released.
+  disableDocAction: true,
+  disableSpaceDelimitedActions: true
+});
 const connection = backend.connect();
 
 const app = express();

@@ -1,9 +1,10 @@
 import * as ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
-import './process';
-import { createView } from '../demoView';
-import { hydrateEditor } from '../hydrateEditor';
 import { opsToTransaction } from 'codemirror-ot';
+
+import './process';
+import { createView } from '../isomorphic/demoView';
+import { hydrateEditor } from '../isomorphic/hydrateEditor';
 
 import '../css/noncritical.css';
 import 'codemirror-theme-ubuntu/codemirror-ubuntu-theme.css';
@@ -26,15 +27,26 @@ doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
     console.log(err);
   }
 
-  let applyingOpTransaction = false;
-  const path = [];
-  const emitOps = ops => {
-    if (!applyingOpTransaction) {
-      doc.submitOp(ops, err => {
+  const opBatchInterval = 1000;
+
+  let opsQueue = [];
+
+  setInterval(() => {
+    if(opsQueue.length) {
+      doc.submitOp(opsQueue, err => {
         if (err) {
           throw err;
         }
       });
+      opsQueue = [];
+    }
+  }, opBatchInterval);
+
+  let applyingOpTransaction = false;
+  const path = [];
+  const emitOps = ops => {
+    if (!applyingOpTransaction) {
+      opsQueue = opsQueue.concat(ops);
     }
   }
   const text = doc.data;

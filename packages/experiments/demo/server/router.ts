@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { createView } from '../demoView';
+import { hydrateEditor } from '../isomorphic/hydrateEditor';
+import { createView } from '../isomorphic/demoView';
 import { createDom } from './dom';
 import { globalAny } from './globalAny';
-import { hydrateEditor } from '../hydrateEditor';
 import { getOrCreateDoc } from './getOrCreateDoc';
 import { html } from './html';
 
