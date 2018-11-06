@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/datavis-tech/codemirror-6-experiments#readme",
   "devDependencies": {
-    "rollup": "^0.66.6",
+    "rollup": "^0.67.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-postcss": "^1.6.2",

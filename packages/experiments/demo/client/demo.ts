@@ -27,10 +27,11 @@ doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
     console.log(err);
   }
 
-  const opBatchInterval = 1000;
+  const path = [];
 
   let opsQueue = [];
 
+  const opBatchInterval = 1000;
   setInterval(() => {
     if(opsQueue.length) {
       doc.submitOp(opsQueue, err => {
@@ -43,7 +44,6 @@ doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
   }, opBatchInterval);
 
   let applyingOpTransaction = false;
-  const path = [];
   const emitOps = ops => {
     if (!applyingOpTransaction) {
       opsQueue = opsQueue.concat(ops);
