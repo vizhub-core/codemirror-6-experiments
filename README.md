@@ -6,12 +6,13 @@ Experiments with [CodeMirror 6](https://github.com/codemirror/codemirror.next). 
 To run:
 
 ```
+git submodule update --init
 npm install -g lerna
 lerna bootstrap
 cd packages/experiments
-npm run watch-demo
+npm run watch
 # open another terminal
-live-server
+npm start
 ```
 Then navigate to
 
