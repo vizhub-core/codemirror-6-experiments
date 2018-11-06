@@ -9,6 +9,8 @@ To run:
 git submodule update --init
 npm install -g lerna
 lerna bootstrap
+lerna run build
+
 cd packages/experiments
 npm run watch
 # open another terminal
