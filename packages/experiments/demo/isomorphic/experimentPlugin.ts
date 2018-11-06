@@ -3,7 +3,7 @@ import {
   EditorView,
   EditorState,
   Transaction
-} from 'codemirror-6';
+} from 'codemirror-6-prerelease';
 
 export const experimentPlugin = new Plugin({
   view: (view: EditorView) => {

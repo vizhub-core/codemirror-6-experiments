@@ -6,16 +6,16 @@ Experiments with [CodeMirror 6](https://github.com/codemirror/codemirror.next). 
 To run:
 
 ```
-git submodule update --init
+git submodule update --init --recursive
 npm install -g lerna
 lerna bootstrap
 lerna run build
-
-cd packages/experiments
-npm run watch
-# open another terminal
-npm start
+lerna run start --stream
 ```
-Then navigate to
+Then navigate to http://localhost:3000
 
-http://localhost:8080/demo/
+To watch for changes and recompile automatically, run the following (in a separate terminal):
+
+```
+lerna run watch --stream
+```
