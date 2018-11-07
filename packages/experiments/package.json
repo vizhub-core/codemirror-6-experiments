@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -w -c rollup.config.js",
-    "start": "node -r ts-node/register demo/server/server.ts",
+    "start": "node -r ts-node/register src/server/server.ts",
     "test": "mocha"
   },
   "repository": {
