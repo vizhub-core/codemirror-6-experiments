@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { createDom } from '../../server/dom';
-import { globalAny } from '../../server/globalAny';
-import { getOrCreateDoc } from '../../server/getOrCreateDoc';
 import { hydrateEditor } from './hydrateEditor';
 import { createView } from './demoView';
 import { html } from './html';
+import { createDom } from '../../server/dom';
+import { globalAny } from '../../server/globalAny';
+import { getOrCreateDoc } from '../../server/getOrCreateDoc';
 
 const dom = createDom(html);
 
