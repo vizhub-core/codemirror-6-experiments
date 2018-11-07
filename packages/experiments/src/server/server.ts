@@ -5,8 +5,7 @@ import * as ShareDB from 'sharedb';
 import * as WebSocket from 'ws';
 import * as WebSocketJSONStream from '@teamwork/websocket-json-stream';
 
-import { indexServer } from '../pages/index/server';
-import { multifileServer} from '../pages/multifile/server';
+import { pagesRouter } from '../pages/router';
 
 const backend = new ShareDB({
 
@@ -19,8 +18,7 @@ const connection = backend.connect();
 
 const app = express();
 
-app.use('/', indexServer(connection));
-app.use('/multifile', multifileServer(connection));
+app.use('/', pagesRouter(connection));
 
 app.use('/build', express.static('build'));
 
