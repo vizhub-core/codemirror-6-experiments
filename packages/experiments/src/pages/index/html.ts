@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const criticalCSS = fs.readFileSync(__dirname + '/../css/critical.css', 'utf8');
+const criticalCSS = fs.readFileSync(__dirname + '/../../css/critical.css', 'utf8');
 
 export const html = `
   <!doctype html>
@@ -14,7 +14,7 @@ export const html = `
     </head>
     <body>
       <div id="editor"></div>
-      <script src="./build/demo_built.js"></script>
+      <script src="./build/bundle.js"></script>
     </body>
   </html>
 `;

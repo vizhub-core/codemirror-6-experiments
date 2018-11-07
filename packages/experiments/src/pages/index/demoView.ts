@@ -11,9 +11,9 @@ import {
 } from 'codemirror-6-prerelease';
 import { otPlugin } from 'codemirror-ot';
 
-import { historyKeymap } from '../client/historyKeymap';
-import { indentationKeymap } from '../client/indentationKeymap';
-import { isBrowser } from './isBrowser';
+import { historyKeymap } from '../../client/historyKeymap';
+import { indentationKeymap } from '../../client/indentationKeymap';
+import { isBrowser } from '../../isomorphic/isBrowser';
 
 export const createView = options => {
   const {
@@ -21,14 +21,6 @@ export const createView = options => {
     emitOps = () => {},
     text = ''
   } = options;
-
-  // TODO init doc from ShareDB data.
-  // const doc = `"use strict";
-  // const {readFile} = require("fs");
-
-  // readFile("package.json", "utf8", (err, data) => {
-  //   console.log(data);
-  // });`
 
   const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
 

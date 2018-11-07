@@ -4,10 +4,10 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 
 export default {
-  input: './demo/client/demo.ts',
+  input: './src/client/index.ts',
   output: {
     format: 'umd',
-    file: './demo/build/demo_built.js',
+    file: './build/bundle.js',
     sourcemap: true
   },
   plugins: [
