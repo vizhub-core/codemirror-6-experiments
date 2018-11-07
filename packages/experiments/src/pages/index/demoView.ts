@@ -11,9 +11,9 @@ import {
 } from 'codemirror-6-prerelease';
 import { otPlugin } from 'codemirror-ot';
 
-import { historyKeymap } from '../client/historyKeymap';
-import { indentationKeymap } from '../client/indentationKeymap';
-import { isBrowser } from './isBrowser';
+import { historyKeymap } from '../../client/historyKeymap';
+import { indentationKeymap } from '../../client/indentationKeymap';
+import { isBrowser } from '../../isomorphic/isBrowser';
 
 export const createView = options => {
   const {

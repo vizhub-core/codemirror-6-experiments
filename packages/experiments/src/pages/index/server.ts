@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { hydrateEditor } from '../isomorphic/hydrateEditor';
-import { createView } from '../isomorphic/demoView';
-import { createDom } from './dom';
-import { globalAny } from './globalAny';
-import { getOrCreateDoc } from './getOrCreateDoc';
+import { createDom } from '../../server/dom';
+import { globalAny } from '../../server/globalAny';
+import { getOrCreateDoc } from '../../server/getOrCreateDoc';
+import { hydrateEditor } from './hydrateEditor';
+import { createView } from './demoView';
 import { html } from './html';
 
 const dom = createDom(html);
 
-export const createRouter = connection => {
+export const indexServer = connection => {
   const router = Router();
   router.get('/', (req, res) => {
     getOrCreateDoc(connection).then((doc: any) => {
