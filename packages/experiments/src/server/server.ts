@@ -18,7 +18,7 @@ const connection = backend.connect();
 
 const app = express();
 app.use('/', createRouter(connection));
-app.use('/build', express.static('demo/build'));
+app.use('/build', express.static('build'));
 
 const server = http.createServer(app);
 

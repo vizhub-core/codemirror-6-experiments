@@ -7,7 +7,7 @@ export default {
   input: './src/client/index.ts',
   output: {
     format: 'umd',
-    file: './src/build/bundle.js',
+    file: './build/bundle.js',
     sourcemap: true
   },
   plugins: [

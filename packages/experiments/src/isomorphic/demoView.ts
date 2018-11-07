@@ -22,14 +22,6 @@ export const createView = options => {
     text = ''
   } = options;
 
-  // TODO init doc from ShareDB data.
-  // const doc = `"use strict";
-  // const {readFile} = require("fs");
-
-  // readFile("package.json", "utf8", (err, data) => {
-  //   console.log(data);
-  // });`
-
   const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
 
   let plugins = [
