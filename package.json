@@ -1,7 +1,10 @@
 {
   "name": "root",
-  "private": true,
+  "scripts": {
+    "start": "lerna bootstrap && concurrently \"lerna run watch --stream\" \"lerna run start --stream\""
+  },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "lerna": "^3.4.3"
   }
 }
