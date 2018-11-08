@@ -1,21 +1,7 @@
 import { select } from 'd3-selection';
 import { createView } from './demoView';
 import { dropdownMenu } from './dropdownMenu';
-
-const files = [
-  {
-    name: 'index.html',
-    text: '<body><h1>Hello!</h1><script src="index.js"></body>'
-  },
-  {
-    name: 'index.js',
-    text: "import foo from './foo'; console.log(foo);"
-  },
-  {
-    name: 'foo.js',
-    text: "export default 'I am foo';"
-  }
-];
+import { files } from './exampleFiles';
 
 const getFile = fileName => files.find(file => file.name === fileName);
 
@@ -42,6 +28,11 @@ export const client = () => {
     }
     const newView = viewForFileName(newSelectedFileName);
     editorDiv.appendChild(newView.dom);
+
+    const cursorPosition = newView.state.selection.primary.anchor;
+    newView.dispatch(newView.state.transaction
+      .setSelection(newView.state.selection.constructor.single(cursorPosition))
+      .scrollIntoView());
 
     selectedFileName = newSelectedFileName;
   };
