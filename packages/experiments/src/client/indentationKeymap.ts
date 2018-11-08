@@ -1,7 +1,8 @@
 import {
   EditorView,
   EditorSelection
-} from 'codemirror-6-prerelease';
+} from '@datavis-tech/codemirror-6-prerelease';
+
 export const indentationKeymap = mode => {
   function crudeInsertNewlineAndIndent({state, dispatch}: EditorView): boolean {
     let indentation = (mode as any).indentation(state, state.selection.primary.from)
