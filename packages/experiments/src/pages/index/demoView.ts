@@ -8,7 +8,7 @@ import {
   legacyMode,
   matchBrackets,
   javascript
-} from 'codemirror-6-prerelease';
+} from '@datavis-tech/codemirror-6-prerelease';
 import { otPlugin } from 'codemirror-ot';
 
 import { historyKeymap } from '../../client/historyKeymap';

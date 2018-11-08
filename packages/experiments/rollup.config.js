@@ -6,13 +6,14 @@ import postcss from 'rollup-plugin-postcss'
 export default {
   input: './src/client/index.ts',
   output: {
-    format: 'umd',
+    format: 'iife',
     file: './build/bundle.js',
     sourcemap: true
   },
   plugins: [
     nodeResolve({
-      preferBuiltins: false
+      preferBuiltins: false,
+      browser: true
     }),
     commonjs(),
     typescript({
