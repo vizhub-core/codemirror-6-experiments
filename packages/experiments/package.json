@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -w -c rollup.config.js",
-    "start": "node -r ts-node/register src/server/server.ts",
+    "start": "nodemon -r ts-node/register src/server/server.ts",
     "test": "mocha"
   },
   "repository": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/datavis-tech/codemirror-6-experiments#readme",
   "devDependencies": {
+    "nodemon": "^1.18.6",
     "rollup": "^0.67.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",

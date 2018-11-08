@@ -13,7 +13,10 @@ export const html = `
       <script id="server-rendered-data"></script>
     </head>
     <body>
-      <h1>Hello</h1>
+      <select id="files-list">
+        <option>js</option>
+        <option>css</option>
+      </select>
       <div id="editor"></div>
       <script src="./build/bundle.js"></script>
     </body>
