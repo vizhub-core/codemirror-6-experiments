@@ -13,8 +13,10 @@ export const html = `
       <script id="server-rendered-data"></script>
     </head>
     <body>
-      <div id="files-list"></div>
-      <div id="editor"></div>
+      <div style="display: flex; flex-direction: column; height: 100%">
+        <div id="files-list"></div>
+        <div id="editor" style="flex-grow: 1"></div>
+      </div>
       <script src="./build/bundle.js"></script>
     </body>
   </html>
