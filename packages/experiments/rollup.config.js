@@ -29,5 +29,11 @@ export default {
       }
     }),
     postcss()
-  ]
+  ],
+  onwarn: function ( message ) {
+    if (message.code === 'CIRCULAR_DEPENDENCY') {
+      return;
+    }
+    console.error(message);
+  }
 }
