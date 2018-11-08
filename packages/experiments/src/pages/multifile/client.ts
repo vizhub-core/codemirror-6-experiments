@@ -26,13 +26,11 @@ export const client = () => {
       const oldView = viewForFileName(selectedFileName);
       oldView.dom.remove();
     }
+
     const newView = viewForFileName(newSelectedFileName);
     editorDiv.appendChild(newView.dom);
 
-    const cursorPosition = newView.state.selection.primary.anchor;
-    newView.dispatch(newView.state.transaction
-      .setSelection(newView.state.selection.constructor.single(cursorPosition))
-      .scrollIntoView());
+    newView.dispatch(newView.state.transaction.scrollIntoView());
 
     selectedFileName = newSelectedFileName;
   };
