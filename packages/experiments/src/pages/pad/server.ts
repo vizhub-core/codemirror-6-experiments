@@ -10,7 +10,7 @@ const dom = createDom(html);
 
 export const server = connection => {
   const router = Router();
-  router.get('/', (req, res) => {
+  router.get('/:id', (req, res) => {
     getOrCreateDoc(connection).then((doc: any) => {
       globalAny.document = dom.window.document;
       const text = doc.data;
@@ -25,8 +25,15 @@ export const server = connection => {
         data: doc.data
       };
 
+      const serverRenderedData = {
+        route: 'pad',
+        params: req.params,
+        snapshot
+      };
+      const serverRenderedJSON = JSON.stringify(serverRenderedData);
+
       document.querySelector('#server-rendered-data')
-        .textContent = `window.serverRenderedData = { snapshot:${JSON.stringify(snapshot)}};`;
+        .textContent = `window.serverRenderedData = ${serverRenderedJSON};`;
 
       res.send(dom.serialize());
       doc.destroy();

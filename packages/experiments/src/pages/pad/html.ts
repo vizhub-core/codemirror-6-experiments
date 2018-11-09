@@ -14,7 +14,7 @@ export const html = `
     </head>
     <body>
       <div id="editor"></div>
-      <script src="./build/bundle.js"></script>
+      <script src="/build/bundle.js"></script>
     </body>
   </html>
 `;
