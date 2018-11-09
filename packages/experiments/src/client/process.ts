@@ -6,6 +6,6 @@ window.process = {
     setTimeout(callback, 0);
   },
 
-  // Used for checking environment.
+  // Enables isomorphic code to check process.browser to detect environment.
   browser: true
 };

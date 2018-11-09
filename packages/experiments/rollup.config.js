@@ -4,7 +4,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 
 export default {
-  input: './src/client/index.ts',
+  input: './src/pages/client.ts',
   output: {
     format: 'iife',
     file: './build/bundle.js',
