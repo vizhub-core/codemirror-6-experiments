@@ -1,4 +1,3 @@
-import '../server/codemirrorGlobalShim';
 import { Router } from 'express';
 import { server as pad } from './pad/server';
 import { server as index } from './index/server';

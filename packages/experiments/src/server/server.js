@@ -5,6 +5,8 @@ import ShareDB from 'sharedb';
 import WebSocket from 'ws';
 import WebSocketJSONStream from '@teamwork/websocket-json-stream';
 
+import './codemirrorGlobalShim';
+
 import { pagesServer } from '../pages/server';
 
 const backend = new ShareDB({
