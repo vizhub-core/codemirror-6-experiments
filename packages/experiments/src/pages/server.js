@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { server as pad } from './pad/server';
 import { server as index } from './index/server';
-import { server as multifile} from './multifile/server';
+import { server as multifile } from './multifile/server';
 
 export const pagesServer = connection => {
   const router = Router();

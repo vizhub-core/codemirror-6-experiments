@@ -6,11 +6,11 @@ global.navigator = {};
 global.window = {
   addEventListener: () => {}
 };
-global.MutationObserver = function () {
-  return ({
+global.MutationObserver = function() {
+  return {
     observe: () => {},
     takeRecords: () => {},
     disconnect: () => {}
-  });
+  };
 };
 global.requestAnimationFrame = () => {};
