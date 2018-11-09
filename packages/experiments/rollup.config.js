@@ -1,10 +1,9 @@
-import typescript from 'rollup-plugin-typescript2'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
 
 export default {
-  input: './src/pages/client.ts',
+  input: './src/pages/client.js',
   output: {
     format: 'iife',
     file: './build/bundle.js',
@@ -16,21 +15,11 @@ export default {
       browser: true
     }),
     commonjs(),
-    typescript({
-      check: false,
-      tsconfigOverride: {
-        compilerOptions: {
-          lib: ['es5', 'es6', 'dom'],
-          sourceMap: true,
-          target: 'es5',
-          strict: false
-        },
-        include: null
-      }
-    }),
     postcss()
   ],
   onwarn: function ( message ) {
+
+    // Suppress circular dependency warnings that come from d3-selection.
     if (message.code === 'CIRCULAR_DEPENDENCY') {
       return;
     }

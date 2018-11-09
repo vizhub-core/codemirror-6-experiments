@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import fs from 'fs';
 
 const criticalCSS = fs.readFileSync(__dirname + '/../../css/critical.css', 'utf8');
 
@@ -13,8 +13,11 @@ export const html = `
       <script id="server-rendered-data"></script>
     </head>
     <body>
-      <div id="editor"></div>
-      <script src="/build/bundle.js"></script>
+      <div style="display: flex; flex-direction: column; height: 100%">
+        <div id="files-list"></div>
+        <div id="editor" style="flex-grow: 1"></div>
+      </div>
+      <script src="./build/bundle.js"></script>
     </body>
   </html>
 `;

@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { hydrateEditor } from './hydrateEditor';
-import { createView } from './demoView'; // needs to come before globalAny
+import { createView } from './demoView';
 import { html } from './html';
 import { createDom } from '../../server/dom';
-import { globalAny } from '../../server/globalAny';
 import { getOrCreateDoc } from '../../server/getOrCreateDoc';
 
 const dom = createDom(html);
@@ -11,8 +10,8 @@ const dom = createDom(html);
 export const server = connection => {
   const router = Router();
   router.get('/:id', (req, res) => {
-    getOrCreateDoc(connection).then((doc: any) => {
-      globalAny.document = dom.window.document;
+    getOrCreateDoc(connection).then(doc => {
+      global.document = dom.window.document;
       const text = doc.data;
       hydrateEditor(createView({ text }));
 
