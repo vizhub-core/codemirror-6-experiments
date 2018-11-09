@@ -1,10 +1,10 @@
 body {
   background-color: #300a24;
   color: white;
+  font-family: SFMono-Regular,Consolas,Ubuntu Mono,Menlo,Courier,monospace;
 }
 
 .CodeMirror {
-  font-family: monospace;
   line-height: 1.4;
 }
 

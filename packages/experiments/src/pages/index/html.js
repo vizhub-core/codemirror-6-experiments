@@ -2,6 +2,7 @@ import { htmlRoot } from '../html';
 
 export const html = htmlRoot({
   title: 'VizHub 2.0 Alpha',
+
   // TODO use React instead of this
   body: `
     <div><a href="/pad/demo">pad</a></div>
