@@ -11,7 +11,7 @@ body {
 .cm-string, .cm-string-2 {
   color: #ad7fa8;
 }
-.cm-keyword, .cm-comment {
+a, .cm-keyword, .cm-comment {
   color: #34e2e2;
 }
 .cm-keyword {
