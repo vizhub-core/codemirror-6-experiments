@@ -1,4 +1,4 @@
-import * as ShareDB from 'sharedb/lib/client';
+import ShareDB from 'sharedb/lib/client';
 import WebSocket from 'reconnecting-websocket';
 import { opsToTransaction } from 'codemirror-ot';
 

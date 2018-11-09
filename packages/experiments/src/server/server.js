@@ -1,9 +1,9 @@
-import * as express  from 'express';
-import * as http from 'http';
+import express  from 'express';
+import http from 'http';
 
-import * as ShareDB from 'sharedb';
-import * as WebSocket from 'ws';
-import * as WebSocketJSONStream from '@teamwork/websocket-json-stream';
+import ShareDB from 'sharedb';
+import WebSocket from 'ws';
+import WebSocketJSONStream from '@teamwork/websocket-json-stream';
 
 import { pagesServer } from '../pages/server';
 
@@ -26,6 +26,6 @@ webSocketServer.on('connection', webSocket => {
   backend.listen(new WebSocketJSONStream(webSocket));
 });
 
-const port: number = 3000;
+const port = 3000;
 server.listen(port);
 console.log(`Listening at http://localhost:${port}/`);

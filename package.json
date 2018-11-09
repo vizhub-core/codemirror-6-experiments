@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "vizhub-io",
   "scripts": {
     "start": "lerna bootstrap && lerna run build && concurrently \"lerna run watch --stream\" \"lerna run start --stream\""
   },
