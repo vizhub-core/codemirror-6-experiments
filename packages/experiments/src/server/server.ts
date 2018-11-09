@@ -5,10 +5,9 @@ import * as ShareDB from 'sharedb';
 import * as WebSocket from 'ws';
 import * as WebSocketJSONStream from '@teamwork/websocket-json-stream';
 
-import { pagesRouter } from '../pages/router';
+import { pagesServer } from '../pages/server';
 
 const backend = new ShareDB({
-
   // The following options serve only to squelch errors.
   // It should be possible to remove these when ShareDB 1.0 is released.
   disableDocAction: true,
@@ -17,9 +16,7 @@ const backend = new ShareDB({
 const connection = backend.connect();
 
 const app = express();
-
-app.use('/', pagesRouter(connection));
-
+app.use('/', pagesServer(connection));
 app.use('/build', express.static('build'));
 
 const server = http.createServer(app);
