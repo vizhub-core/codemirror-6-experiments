@@ -1,17 +1,17 @@
 body {
   background-color: #300a24;
   color: white;
+  font-family: Ubuntu Mono,SFMono-Regular,Consolas,Menlo,Courier,monospace;
 }
 
 .CodeMirror {
-  font-family: monospace;
   line-height: 1.4;
 }
 
 .cm-string, .cm-string-2 {
   color: #ad7fa8;
 }
-.cm-keyword, .cm-comment {
+a, .cm-keyword, .cm-comment {
   color: #34e2e2;
 }
 .cm-keyword {
