@@ -1,11 +1,8 @@
 import { h, render } from 'preact';
+import { Page } from './page';
+
+const preactRoot = document.getElementById('preact-root');
 
 export const client = () => {
-  // TODO render isomorphic
-  render((
-    <div id="foo">
-      <span>Hello, world!</span>
-      <button onClick={ e => alert("hi!") }>Click Me</button>
-    </div>
-  ), document.getElementById('preact-root'));
+  render(<Page />, preactRoot.parentNode, preactRoot);
 };
