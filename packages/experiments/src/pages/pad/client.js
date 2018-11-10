@@ -22,11 +22,26 @@ export const client = params => {
 
   const connection = new ShareDB.Connection(socket);
 
-
   const shareDBDoc = connection.get('examples', id);
   shareDBDoc.ingestSnapshot(window.serverRenderedData.snapshot, errorLog(() => {
     shareDBDoc.subscribe(errorLog);
     const view = CodeMirrorShareDBBinding({ shareDBDoc, createView });
     hydrateEditor(view);
   }));
+
+  const onSaving = () => {
+    console.log('saving...');
+  };
+
+  const onSaved = () => {
+    console.log('saved.');
+  };
+
+  shareDBDoc.on('before op', (op, originatedLocally) => {
+    if (originatedLocally) {
+      onSaving();
+      shareDBDoc.whenNothingPending(errorLog(onSaved));
+    }
+  });
+
 };
