@@ -7,7 +7,7 @@
     "prettier": "prettier --single-quote */**/*.js --write",
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -w -c rollup.config.js",
-    "start": "nodemon build/server/bundle.js",
+    "start": "nodemon build/server/bundle.js -w build/server",
     "test": "mocha"
   },
   "repository": {
