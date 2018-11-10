@@ -19,7 +19,7 @@ const connection = backend.connect();
 
 const app = express();
 app.use('/', pagesServer(connection));
-app.use('/build', express.static('build'));
+app.use('/build', express.static('build/client'));
 
 const server = http.createServer(app);
 
