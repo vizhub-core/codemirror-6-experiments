@@ -18,3 +18,9 @@ export const htmlRoot = ({title, body}) => `
     </body>
   </html>
 `;
+
+export const setServerRenderedData = (dom, serverRenderedData) => {
+  const json = JSON.stringify(serverRenderedData);
+  dom.window.document.querySelector('#server-rendered-data')
+    .textContent = `window.serverRenderedData = ${json};`;
+};

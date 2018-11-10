@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { hydrateEditor } from './hydrateEditor';
 import { createView } from './demoView';
 import { html } from './html';
+import { setServerRenderedData } from '../html';
 import { createDom } from '../../server/dom';
 import { getOrCreateDoc } from '../../server/getOrCreateDoc';
 
@@ -24,15 +25,11 @@ export const server = connection => {
         data: doc.data
       };
 
-      const serverRenderedData = {
+      setServerRenderedData(dom, {
         route: 'pad',
         params: req.params,
         snapshot
-      };
-      const serverRenderedJSON = JSON.stringify(serverRenderedData);
-
-      document.querySelector('#server-rendered-data')
-        .textContent = `window.serverRenderedData = ${serverRenderedJSON};`;
+      });
 
       res.send(dom.serialize());
       doc.destroy();
