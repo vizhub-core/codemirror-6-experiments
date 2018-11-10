@@ -6,6 +6,7 @@ import { setServerRenderedData } from '../html';
 import { createDom } from '../../server/dom';
 import { getOrCreateDoc } from '../../server/getOrCreateDoc';
 
+const route = 'pad';
 const dom = createDom(html);
 
 export const server = connection => {
@@ -27,7 +28,7 @@ export const server = connection => {
       // initialize the document in the client.
       const snapshot = { v: doc.version, data: doc.data };
 
-      setServerRenderedData(dom, { route: 'pad', params, snapshot });
+      setServerRenderedData(dom, { route, params, snapshot });
 
       res.send(dom.serialize());
       doc.destroy();

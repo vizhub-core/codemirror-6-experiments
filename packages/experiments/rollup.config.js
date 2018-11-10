@@ -13,6 +13,11 @@ export default {
     sourcemap: true
   },
   plugins: [
+    postcss(),
+    buble({
+      // Support Preact JSX
+      jsx: 'h'
+    }),
     nodeResolve({
 
       // Required for the case of the 'event' module,
@@ -20,8 +25,6 @@ export default {
       preferBuiltins: false,
     }),
     commonjs(),
-    postcss(),
-    buble(),
     uglify(),
     // Uncomment to see what files are making the bundle large.
     //analyze({
