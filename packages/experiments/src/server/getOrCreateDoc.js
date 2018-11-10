@@ -4,9 +4,9 @@ readFile("package.json", "utf8", (err, data) => {
   console.log(data);
 });`;
 
-export const getOrCreateDoc = connection =>
+export const getOrCreateDoc = (connection, id) =>
   new Promise((resolve, reject) => {
-    const doc = connection.get('examples', 'textarea');
+    const doc = connection.get('examples', id);
     doc.fetch(err => {
       if (err) {
         reject(err);

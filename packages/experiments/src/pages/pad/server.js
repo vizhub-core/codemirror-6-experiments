@@ -11,7 +11,10 @@ const dom = createDom(html);
 export const server = connection => {
   const router = Router();
   router.get('/:id', (req, res) => {
-    getOrCreateDoc(connection).then(doc => {
+    const { params } = req;
+    const { id } = params;
+
+    getOrCreateDoc(connection, id).then(doc => {
       global.document = dom.window.document;
       const text = doc.data;
       hydrateEditor(createView({ text }));
@@ -20,16 +23,11 @@ export const server = connection => {
       // Otherwise edits made before JS loads will be lost.
       document.querySelector('.CodeMirror-content').removeAttribute('contenteditable');
 
-      const snapshot = {
-        v: doc.version,
-        data: doc.data
-      };
+      // This snapshot of the ShareDB document is used to
+      // initialize the document in the client.
+      const snapshot = { v: doc.version, data: doc.data };
 
-      setServerRenderedData(dom, {
-        route: 'pad',
-        params: req.params,
-        snapshot
-      });
+      setServerRenderedData(dom, { route: 'pad', params, snapshot });
 
       res.send(dom.serialize());
       doc.destroy();

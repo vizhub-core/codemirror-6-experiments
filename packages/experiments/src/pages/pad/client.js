@@ -6,7 +6,7 @@ import { createView } from './demoView';
 import { hydrateEditor } from './hydrateEditor';
 
 export const client = params => {
-  console.log({ params });
+  const { id } = params;
 
   const webSocketProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
   const webSocketUrl = webSocketProtocol + '//' + window.location.host;
@@ -20,7 +20,7 @@ export const client = params => {
 
   const connection = new ShareDB.Connection(socket);
 
-  const doc = connection.get('examples', 'textarea');
+  const doc = connection.get('examples', id);
   doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
     if (err) {
       console.log(err);
