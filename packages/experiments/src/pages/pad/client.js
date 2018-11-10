@@ -4,6 +4,7 @@ import { hydrateEditor } from './hydrateEditor';
 import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';
 import { errorLog } from '../../client/errorLog';
 import { shareDBConnection } from '../../client/shareDBConnection';
+import { savingSaved } from '../../client/savingSaved';
 
 export const client = params => {
   const shareDBDoc = shareDBConnection.get('examples', params.id);
@@ -14,12 +15,9 @@ export const client = params => {
   }));
 
   // TODO expose this in UI
-  const onSaving = () => { console.log('saving...'); };
-  const onSaved = () => { console.log('saved.'); };
-  shareDBDoc.on('before op', (op, originatedLocally) => {
-    if (originatedLocally) {
-      onSaving();
-      shareDBDoc.whenNothingPending(errorLog(onSaved));
-    }
+  savingSaved({
+    shareDBDoc,
+    onSaving: () => { console.log('saving...'); },
+    onSaved: () => { console.log('saved.'); }
   });
 };
