@@ -1,6 +1,9 @@
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import postcss from 'rollup-plugin-postcss'
+import buble from 'rollup-plugin-buble';
+import { uglify } from "rollup-plugin-uglify";
+import { plugin as analyze } from 'rollup-plugin-analyzer'
 
 export default {
   input: './src/pages/client.js',
@@ -17,7 +20,13 @@ export default {
       preferBuiltins: false,
     }),
     commonjs(),
-    postcss()
+    postcss(),
+    buble(),
+    uglify(),
+    // Uncomment to see what files are making the bundle large.
+    //analyze({
+    //  filter: module => module.percent > 3
+    //})
   ],
   onwarn: function ( message ) {
 
