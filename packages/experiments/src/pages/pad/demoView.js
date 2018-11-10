@@ -16,9 +16,9 @@ import { indentationKeymap } from '../../client/indentationKeymap';
 
 export const createView = options => {
   const {
+    doc,
     path = [],
     emitOps = () => {},
-    text = ''
   } = options;
 
   const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
@@ -39,7 +39,7 @@ export const createView = options => {
     ]);
   }
 
-  const state = EditorState.create({ doc: text, plugins })
+  const state = EditorState.create({ doc, plugins })
 
   return new EditorView(state);
 };

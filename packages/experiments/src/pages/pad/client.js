@@ -5,6 +5,8 @@ import { opsToTransaction } from 'codemirror-ot';
 import { createView } from './demoView';
 import { hydrateEditor } from './hydrateEditor';
 
+import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';
+
 export const client = params => {
   const { id } = params;
 
@@ -20,50 +22,12 @@ export const client = params => {
 
   const connection = new ShareDB.Connection(socket);
 
-  const doc = connection.get('examples', id);
-  doc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
+  const shareDBDoc = connection.get('examples', id);
+  shareDBDoc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
     if (err) {
       console.log(err);
     }
-
-    const path = [];
-
-    let opsQueue = [];
-
-    const opBatchInterval = 1000;
-    setInterval(() => {
-      if(opsQueue.length) {
-        doc.submitOp(opsQueue, err => {
-          if (err) {
-            throw err;
-          }
-        });
-        opsQueue = [];
-      }
-    }, opBatchInterval);
-
-    let applyingOpTransaction = false;
-    const emitOps = ops => {
-      if (!applyingOpTransaction) {
-        opsQueue = opsQueue.concat(ops);
-      }
-    }
-    const text = doc.data;
-    const view = createView({ path, emitOps, text });
+    const view = CodeMirrorShareDBBinding({ shareDBDoc, createView });
     hydrateEditor(view);
-
-    doc.on('op', (op, originatedLocally) => {
-      if (!originatedLocally) {
-        applyingOpTransaction = true;
-        view.dispatch(opsToTransaction(path, view.state, op));
-        applyingOpTransaction = false;
-      }
-    });
-
-    doc.subscribe(err => {
-      if (err) {
-        throw err;
-      }
-    });
   });
 };
