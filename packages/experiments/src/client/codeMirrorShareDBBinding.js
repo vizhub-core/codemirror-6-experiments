@@ -1,4 +1,4 @@
-import { otPlugin } from 'codemirror-ot';
+import { otPlugin, opsToTransaction } from 'codemirror-ot';
 
 export const CodeMirrorShareDBBinding = options => {
   const {
