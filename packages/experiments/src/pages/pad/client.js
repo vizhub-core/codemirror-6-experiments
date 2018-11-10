@@ -4,13 +4,8 @@ import { opsToTransaction } from 'codemirror-ot';
 
 import { createView } from './demoView';
 import { hydrateEditor } from './hydrateEditor';
-
 import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';
-
-const errorLog = callback => error =>
-  error
-    ? console.log(error)
-    : callback();
+import { errorLog } from '../../client/errorLog';
 
 export const client = params => {
   const { id } = params;
