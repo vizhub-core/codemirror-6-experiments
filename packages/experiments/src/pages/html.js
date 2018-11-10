@@ -1,6 +1,4 @@
-import fs from 'fs';
-
-const criticalCSS = fs.readFileSync(__dirname + '/../css/critical.css', 'utf8');
+import criticalCSS from '../css/critical.css';
 
 export const htmlRoot = ({ title, body }) => `
   <!doctype html>
