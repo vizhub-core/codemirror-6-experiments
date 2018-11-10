@@ -1,7 +1,6 @@
 import { otPlugin } from 'codemirror-ot';
 
 export const CodeMirrorShareDBBinding = options => {
-
   const {
     shareDBDoc,
     createView,
@@ -11,7 +10,7 @@ export const CodeMirrorShareDBBinding = options => {
 
   let opsQueue = [];
   setInterval(() => {
-    if(opsQueue.length) {
+    if (opsQueue.length) {
       shareDBDoc.submitOp(opsQueue, err => {
         if (err) {
           throw err;
@@ -26,7 +25,7 @@ export const CodeMirrorShareDBBinding = options => {
     if (!applyingOpTransaction) {
       opsQueue = opsQueue.concat(ops);
     }
-  }
+  };
 
   // TODO use path here.
   const doc = shareDBDoc.data;
@@ -43,6 +42,6 @@ export const CodeMirrorShareDBBinding = options => {
       applyingOpTransaction = false;
     }
   });
-  
+
   return view;
 };

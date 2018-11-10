@@ -2,7 +2,7 @@ import fs from 'fs';
 
 const criticalCSS = fs.readFileSync(__dirname + '/../css/critical.css', 'utf8');
 
-export const htmlRoot = ({title, body}) => `
+export const htmlRoot = ({ title, body }) => `
   <!doctype html>
   <html>
     <head>
@@ -21,6 +21,7 @@ export const htmlRoot = ({title, body}) => `
 
 export const setServerRenderedData = (dom, serverRenderedData) => {
   const json = JSON.stringify(serverRenderedData);
-  dom.window.document.querySelector('#server-rendered-data')
-    .textContent = `window.serverRenderedData = ${json};`;
+  dom.window.document.querySelector(
+    '#server-rendered-data'
+  ).textContent = `window.serverRenderedData = ${json};`;
 };

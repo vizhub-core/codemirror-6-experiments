@@ -10,7 +10,7 @@ export const historyKeymap = () => {
   const keymap = {
     'Mod-z': undo,
     'Mod-Shift-z': redo,
-    'Mod-u': view => (undoSelection(view) || true),
+    'Mod-u': view => undoSelection(view) || true,
     'Ctrl-y': isMac ? undefined : redo
   };
   keymap[isMac ? 'Mod-Shift-u' : 'Alt-u'] = redoSelection;
