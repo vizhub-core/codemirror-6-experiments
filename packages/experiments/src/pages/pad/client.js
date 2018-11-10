@@ -7,6 +7,11 @@ import { hydrateEditor } from './hydrateEditor';
 
 import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';
 
+const errorLog = callback => error =>
+  error
+    ? console.log(error)
+    : callback();
+
 export const client = params => {
   const { id } = params;
 
@@ -22,12 +27,11 @@ export const client = params => {
 
   const connection = new ShareDB.Connection(socket);
 
+
   const shareDBDoc = connection.get('examples', id);
-  shareDBDoc.ingestSnapshot(window.serverRenderedData.snapshot, err => {
-    if (err) {
-      console.log(err);
-    }
+  shareDBDoc.ingestSnapshot(window.serverRenderedData.snapshot, errorLog(() => {
+    shareDBDoc.subscribe(errorLog);
     const view = CodeMirrorShareDBBinding({ shareDBDoc, createView });
     hydrateEditor(view);
-  });
+  }));
 };

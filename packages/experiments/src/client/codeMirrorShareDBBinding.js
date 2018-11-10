@@ -43,12 +43,6 @@ export const CodeMirrorShareDBBinding = options => {
       applyingOpTransaction = false;
     }
   });
-
-  shareDBDoc.subscribe(err => {
-    if (err) {
-      throw err;
-    }
-  });
   
   return view;
 };
