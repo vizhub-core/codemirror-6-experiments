@@ -6,7 +6,7 @@ import { uglify } from "rollup-plugin-uglify";
 import { plugin as analyze } from 'rollup-plugin-analyzer'
 
 export default {
-  input: './src/pages/client.js',
+  input: './src/client/index.js',
   output: {
     format: 'iife',
     file: './build/bundle.js',

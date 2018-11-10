@@ -1,6 +1,7 @@
 import { h, render } from 'preact';
 
 export const client = () => {
+  // TODO render isomorphic
   render((
     <div id="foo">
       <span>Hello, world!</span>
