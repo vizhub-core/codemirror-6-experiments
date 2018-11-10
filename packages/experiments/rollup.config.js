@@ -11,8 +11,10 @@ export default {
   },
   plugins: [
     nodeResolve({
+
+      // Required for the case of the 'event' module,
+      // which the ShareDB client depends on.
       preferBuiltins: false,
-      browser: true
     }),
     commonjs(),
     postcss()
