@@ -1,14 +1,15 @@
+import { otPlugin } from 'codemirror-ot';
+
 export const CodeMirrorShareDBBinding = options => {
 
   const {
     shareDBDoc,
     createView,
-    path = [],
-    opBatchInterval = 500
+    path = [], // The path of the field in the json0 document
+    opBatchInterval = 500 // Milliseconds between op batches.
   } = options;
 
   let opsQueue = [];
-
   setInterval(() => {
     if(opsQueue.length) {
       shareDBDoc.submitOp(opsQueue, err => {
@@ -31,8 +32,7 @@ export const CodeMirrorShareDBBinding = options => {
   const doc = shareDBDoc.data;
 
   const view = createView({
-    path,
-    emitOps,
+    otPlugin: otPlugin(path, emitOps),
     doc
   });
 
