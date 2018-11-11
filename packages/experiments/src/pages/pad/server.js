@@ -8,6 +8,7 @@ import { getOrCreateDoc } from '../../server/getOrCreateDoc';
 
 const route = 'pad';
 const dom = createDom(html);
+const document = dom.window.document;
 
 export const server = connection => {
   const router = Router();
@@ -15,10 +16,10 @@ export const server = connection => {
     const { params } = req;
     const { id } = params;
 
-    getOrCreateDoc(connection, id).then(doc => {
-      global.document = dom.window.document;
-      const text = doc.data;
-      hydrateEditor(createView({ text }));
+    getOrCreateDoc(connection, id).then(shareDBDoc => {
+      global.document = document;
+      const doc = shareDBDoc.data;
+      hydrateEditor(createView({ doc }));
 
       // Make the content non-interactive until the JS loads.
       // Otherwise edits made before JS loads will be lost.
@@ -26,12 +27,12 @@ export const server = connection => {
 
       // This snapshot of the ShareDB document is used to
       // initialize the document in the client.
-      const snapshot = { v: doc.version, data: doc.data };
+      const snapshot = { v: shareDBDoc.version, data: shareDBDoc.data };
 
       setServerRenderedData(dom, { route, params, snapshot });
 
       res.send(dom.serialize());
-      doc.destroy();
+      shareDBDoc.destroy();
     });
   });
   return router;
