@@ -4,5 +4,7 @@ import { Page } from './page';
 const preactRoot = document.getElementById('preact-root');
 
 export const client = () => {
-  render(<Page />, preactRoot.parentNode, preactRoot);
+  render(<Page />, preactRoot, preactRoot.firstElementChild);
 };
+
+setInterval(client, 1000);

@@ -14,7 +14,7 @@ export const server = connection => {
   const router = Router();
   router.get('/', (req, res) => {
     setServerRenderedData(dom, { route });
-    render(<Page />, preactRoot);
+    render(<Page />, preactRoot, preactRoot.firstElementChild);
     res.send(dom.serialize());
   });
   return router;
