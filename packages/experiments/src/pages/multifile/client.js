@@ -11,7 +11,6 @@ export const client = () => {
 };
 
 //
-//const getFile = fileName => files.find(file => file.name === fileName);
 //
 //const views = {};
 //const getOrCreateView = selectedFile => {
