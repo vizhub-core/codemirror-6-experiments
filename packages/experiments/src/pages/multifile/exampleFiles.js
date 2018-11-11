@@ -1,4 +1,4 @@
-export const files = [
+export const exampleFiles = [
   {
     name: 'index.html',
     text: '<body><h1>Hello!</h1><script src="index.js"></body>'

@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import { DropdownMenu } from './dropdownMenu';
-import { files } from './exampleFiles';
+import { Editor } from './editor';
+import { exampleFiles } from './exampleFiles';
 
 //const setSelectedFileName = newSelectedFileName => {
 //  console.log({ newSelectedFileName });
@@ -18,6 +19,7 @@ export class Page extends Component {
   constructor() {
     super();
     this.state.selectedFileName = 'index.js';
+    this.state.files = exampleFiles;
     this.setSelectedFileName = selectedFileName => {
       this.setState({ selectedFileName });
     };
@@ -26,11 +28,10 @@ export class Page extends Component {
     const {
       setSelectedFileName,
       state: {
-        selectedFileName
+        selectedFileName,
+        files
       }
     } = this;
-
-    console.log(selectedFileName);
 
     return (
       <div style="display: flex; flex-direction: column; height: 100%">
@@ -42,7 +43,10 @@ export class Page extends Component {
           />
         </div>
         <div style="flex-grow: 1">
-          Editor
+          <Editor
+            selectedFileName={ selectedFileName }
+            files={ files }
+          />
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ export class Editor extends Component {
 
     return (
       <div>
-        Editor
+        { selectedFileName }
       </div>
     );
   }
