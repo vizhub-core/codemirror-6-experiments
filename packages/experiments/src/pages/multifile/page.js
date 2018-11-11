@@ -42,7 +42,7 @@ export class Page extends Component {
             selectedOption={ selectedFileName }
           />
         </div>
-        <div style="flex-grow: 1">
+        <div style="flex-grow: 1; overflow: auto">
           <Editor
             selectedFileName={ selectedFileName }
             files={ files }

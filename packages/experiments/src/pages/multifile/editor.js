@@ -21,7 +21,7 @@ export class Editor extends Component {
     super();
   }
 
-  setSelectedFileName(files, newSelectedFileName) {
+  setSelectedFileName({ files, selectedFileName: newSelectedFileName}) {
     const { selectedFileName } = this;
 
     if (selectedFileName) {
@@ -38,8 +38,11 @@ export class Editor extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    const { selectedFileName, files } = this.props;
-    this.setSelectedFileName(files, selectedFileName);
+    this.setSelectedFileName(nextProps);
+  }
+
+  componentDidMount() {
+    this.setSelectedFileName(this.props);
   }
 
   shouldComponentUpdate() {
