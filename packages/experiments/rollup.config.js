@@ -57,4 +57,4 @@ const server = {
   onwarn
 };
 
-export default [ client, server ];
+export default [ server, client ];

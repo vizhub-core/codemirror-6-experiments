@@ -6,5 +6,3 @@ const preactRoot = document.getElementById('preact-root');
 export const client = () => {
   render(<Page />, preactRoot, preactRoot.firstElementChild);
 };
-
-setInterval(client, 1000);
