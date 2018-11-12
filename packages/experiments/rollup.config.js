@@ -19,7 +19,7 @@ const plugins = () => [
     preferBuiltins: false,
   }),
   commonjs(),
-  uglify(),
+  //uglify(),
   // Uncomment to see what files are making the bundle large.
   //analyze({
   //  filter: module => module.percent > 3
@@ -57,4 +57,20 @@ const server = {
   onwarn
 };
 
-export default [ server, client ];
+const test = {
+  external: server.external.concat(['puppeteer', 'assert']),
+  input: './test/test.js',
+  output: {
+    format: 'cjs',
+    file: './build/test/bundle.js',
+    sourcemap: true
+  },
+  plugins: plugins(),
+  onwarn
+};
+
+export default [
+  server,
+  client,
+  test
+];
