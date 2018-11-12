@@ -1,6 +1,6 @@
 
 // Example from https://www.npmjs.com/package/rollup-plugin-hypothetical
-const defaultData = {
+export const defaultData = {
   files: {
     './dir/a.js': `
       import foo from './b.js';

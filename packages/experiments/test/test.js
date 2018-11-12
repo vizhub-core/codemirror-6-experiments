@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import assert from 'assert';
+import { defaultData } from '../src/pages/multifilePad/getOrCreateMultifileDoc';
 
 const puppeteerOptions = { args: ['--no-sandbox'] };
 
@@ -41,13 +42,18 @@ describe('vizhub-io', () => {
       assert.equal(serverRenderedData.id, 'abc');
     });
 
-    //it('should render snapshot in serverRenderedData', async function() {
-    //  assert.equal(serverRenderedData.snapshot, '{fdhasjk}');
-    //});
+    it('should render shareDBSnapshot in serverRenderedData', async function() {
+      assert.deepEqual(serverRenderedData.shareDBSnapshot, {
+        v: 1,
+        data: defaultData
+      });
+    });
+
+    it('should close browser', async function() {
+      await browser.close();
+    });
 
   });
-
-
 });
 // Pad
 //   Server render CodeMirror

@@ -3,8 +3,8 @@ import { html } from './html';
 import { createDom } from '../../server/dom';
 import { setServerRenderedData } from '../html';
 import { getOrCreateMultifileDoc } from './getOrCreateMultifileDoc';
+import { createShareDBSnapshot } from '../../server/createShareDBSnapshot';
 //import { Page } from './page';
-//`
 
 const route = 'multifilePad';
 const dom = createDom(html);
@@ -18,16 +18,16 @@ export const server = connection => {
       }
     } = req;
 
-    setServerRenderedData(dom, {
-      id,
-      route,
-      //snapshot
+    getOrCreateMultifileDoc(connection, id).then(shareDBDoc => {
+      setServerRenderedData(dom, {
+        id,
+        route,
+        shareDBSnapshot: createShareDBSnapshot(shareDBDoc)
+      });
+
+      res.send(dom.serialize());
     });
-
-    res.send(dom.serialize());
-
-    //getOrCreateDoc(connection, id).then(shareDBDoc => {
-    //}
   });
+
   return router;
 };
