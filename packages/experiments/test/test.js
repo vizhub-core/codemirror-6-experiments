@@ -19,18 +19,31 @@ describe('vizhub-io', () => {
   describe('multifilePad', () => {
     let browser;
     let page;
+    let serverRenderedData;
 
     it('should open page', async function() {
       browser = await puppeteer.launch(puppeteerOptions);
       page = await browser.newPage();
-      const response = await retry(() => page.goto('http://localhost:3000/multifilePad'), 1000);
+      const response = await retry(() => page.goto('http://localhost:3000/multifilePad/abc'), 1000);
       assert.equal(response.status(), 200);
     }).timeout(60000);
 
+    it('should render serverRenderedData on the server', async function() {
+      serverRenderedData = await page.evaluate(() => window.serverRenderedData);
+      assert(serverRenderedData);
+    });
+
     it('should render route in serverRenderedData', async function() {
-      const serverRenderedData = await page.evaluate(() => window.serverRenderedData);
       assert.equal(serverRenderedData.route, 'multifilePad');
     });
+
+    it('should render id in serverRenderedData', async function() {
+      assert.equal(serverRenderedData.id, 'abc');
+    });
+
+    //it('should render snapshot in serverRenderedData', async function() {
+    //  assert.equal(serverRenderedData.snapshot, '{fdhasjk}');
+    //});
 
   });
 
