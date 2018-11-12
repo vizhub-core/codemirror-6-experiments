@@ -21,8 +21,8 @@ export const server = connection => {
       setServerRenderedData(dom, { id, route, shareDBSnapshot });
       render(<Page />, root, root.firstElementChild);
       res.send(dom.serialize());
+      shareDBDoc.destroy();
     });
   });
-
   return router;
 };

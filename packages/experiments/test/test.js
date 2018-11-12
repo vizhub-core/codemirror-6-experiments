@@ -56,6 +56,10 @@ describe('vizhub-io', () => {
       });
     });
 
+    it('should client-render Page DOM', async function() {
+      await page.waitFor('.test-client-render');
+    });
+
     it('should close browser', async function() {
       await browser.close();
     });
