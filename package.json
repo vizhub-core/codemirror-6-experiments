@@ -1,7 +1,7 @@
 {
   "name": "vizhub-io",
   "scripts": {
-    "start": "lerna bootstrap && concurrently \"lerna run watch --stream\" \"lerna run start --stream\""
+    "start": "lerna bootstrap && concurrently \"lerna run build-watch --stream\" \"lerna run start-watch --stream\" \"lerna run test-watch --stream\""
   },
   "devDependencies": {
     "concurrently": "^4.0.1",

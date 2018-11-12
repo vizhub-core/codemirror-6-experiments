@@ -6,10 +6,11 @@
   "scripts": {
     "prettier": "prettier --single-quote '**/*.js' --write",
     "build": "rollup -c rollup.config.js",
-    "watch": "rollup -w -c rollup.config.js",
-    "start": "nodemon build/server/bundle.js -w build/server",
-    "watch-test": "cd build/test; mocha bundle.js --watch",
-    "test": "cd build/test; mocha bundle.js"
+    "build-watch": "rollup -w -c rollup.config.js",
+    "test": "cd build/test; mocha bundle.js",
+    "test-watch": "cd build/test; mocha bundle.js --watch",
+    "start": "node build/server/bundle.js",
+    "start-watch": "nodemon build/server/bundle.js -w build/server"
   },
   "repository": {
     "type": "git",
