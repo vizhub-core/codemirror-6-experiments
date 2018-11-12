@@ -2,6 +2,6 @@ import { h } from 'preact';
 
 export const Page = () => (
   <div>
-    FDsafdas
+    <div className='test-server-render' />
   </div>
 );
