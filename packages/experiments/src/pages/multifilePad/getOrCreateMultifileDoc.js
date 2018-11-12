@@ -1,4 +1,3 @@
-
 // Example from https://www.npmjs.com/package/rollup-plugin-hypothetical
 export const defaultData = {
   files: {

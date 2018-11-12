@@ -23,7 +23,9 @@ export const server = connection => {
 
       // Make the content non-interactive until the JS loads.
       // Otherwise edits made before JS loads will be lost.
-      document.querySelector('.CodeMirror-content').removeAttribute('contenteditable');
+      document
+        .querySelector('.CodeMirror-content')
+        .removeAttribute('contenteditable');
 
       // This snapshot of the ShareDB document is used to
       // initialize the document in the client.

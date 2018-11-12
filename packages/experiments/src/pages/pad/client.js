@@ -11,15 +11,22 @@ const { snapshot } = window.serverRenderedData;
 export const client = params => {
   const shareDBDoc = shareDBConnection.get('examples', params.id);
 
-  shareDBDoc.ingestSnapshot(snapshot, errorLog(() => {
-    hydrateEditor(CodeMirrorShareDBBinding({ shareDBDoc, createView }));
-    shareDBDoc.subscribe(errorLog);
-  }));
+  shareDBDoc.ingestSnapshot(
+    snapshot,
+    errorLog(() => {
+      hydrateEditor(CodeMirrorShareDBBinding({ shareDBDoc, createView }));
+      shareDBDoc.subscribe(errorLog);
+    })
+  );
 
   // TODO expose this in UI
   savingSaved({
     shareDBDoc,
-    onSaving: () => { console.log('saving...'); },
-    onSaved: () => { console.log('saved.'); }
+    onSaving: () => {
+      console.log('saving...');
+    },
+    onSaved: () => {
+      console.log('saved.');
+    }
   });
 };

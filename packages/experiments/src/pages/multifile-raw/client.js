@@ -17,7 +17,6 @@ const getOrCreateView = selectedFile => {
 const viewForFileName = fileName => getOrCreateView(getFile(fileName));
 
 export const client = () => {
-
   let selectedFileName;
   const editorDiv = document.querySelector('#editor');
 
@@ -37,10 +36,9 @@ export const client = () => {
 
   setSelectedFileName('index.html');
 
-  select('#files-list')
-    .call(dropdownMenu, {
-      options: files.map(file => file.name),
-      onOptionClicked: setSelectedFileName,
-      selectedOption: selectedFileName
-    });
+  select('#files-list').call(dropdownMenu, {
+    options: files.map(file => file.name),
+    onOptionClicked: setSelectedFileName,
+    selectedOption: selectedFileName
+  });
 };

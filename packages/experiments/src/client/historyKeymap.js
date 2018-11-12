@@ -5,7 +5,6 @@ import {
   undoSelection
 } from '@datavis-tech/codemirror-6-prerelease';
 
-
 export const historyKeymap = () => {
   const isMac = /Mac/.test(navigator.platform);
   const keymap = {

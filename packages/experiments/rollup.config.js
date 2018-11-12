@@ -1,9 +1,9 @@
-import commonjs from 'rollup-plugin-commonjs'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import postcss from 'rollup-plugin-postcss'
+import commonjs from 'rollup-plugin-commonjs';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import postcss from 'rollup-plugin-postcss';
 import buble from 'rollup-plugin-buble';
-import { uglify } from "rollup-plugin-uglify";
-import { plugin as analyze } from 'rollup-plugin-analyzer'
+import { uglify } from 'rollup-plugin-uglify';
+import { plugin as analyze } from 'rollup-plugin-analyzer';
 
 const plugins = () => [
   postcss(),
@@ -13,12 +13,11 @@ const plugins = () => [
     transforms: { forOf: false }
   }),
   nodeResolve({
-
     // Required for the case of the 'event' module,
     // which the ShareDB client depends on.
-    preferBuiltins: false,
+    preferBuiltins: false
   }),
-  commonjs(),
+  commonjs()
   //uglify(),
   // Uncomment to see what files are making the bundle large.
   //analyze({
@@ -42,11 +41,26 @@ const client = {
     sourcemap: true
   },
   plugins: plugins(),
-  onwarn,
+  onwarn
 };
 
 const server = {
-  external: ['jsdom', "@teamwork/websocket-json-stream", "codemirror-ot", "codemirror-theme-ubuntu", "d3-selection", "events", "express", "jsdom", "preact", "reconnecting-websocket", "sharedb", "ws", 'fs', 'http'],
+  external: [
+    'jsdom',
+    '@teamwork/websocket-json-stream',
+    'codemirror-ot',
+    'codemirror-theme-ubuntu',
+    'd3-selection',
+    'events',
+    'express',
+    'jsdom',
+    'preact',
+    'reconnecting-websocket',
+    'sharedb',
+    'ws',
+    'fs',
+    'http'
+  ],
   input: './src/server/index.js',
   output: {
     format: 'cjs',
@@ -69,8 +83,4 @@ const test = {
   onwarn
 };
 
-export default [
-  server,
-  client,
-  test
-];
+export default [server, client, test];

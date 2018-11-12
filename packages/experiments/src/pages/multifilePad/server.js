@@ -13,9 +13,7 @@ export const server = connection => {
   const router = Router();
   router.get('/:id', (req, res) => {
     const {
-      params: {
-        id
-      }
+      params: { id }
     } = req;
 
     getOrCreateMultifileDoc(connection, id).then(shareDBDoc => {

@@ -4,19 +4,19 @@ import { defaultData } from '../src/pages/multifilePad/getOrCreateMultifileDoc';
 
 const puppeteerOptions = { args: ['--no-sandbox'] };
 
-const retry = (fn, ms) => new Promise(resolve => {
-  fn()
-    .then(resolve)
-    .catch(() => {
-      setTimeout(() => {
-        console.log('retrying...');
-        retry(fn, ms).then(resolve);
-      }, ms);
-    });
-});
+const retry = (fn, ms) =>
+  new Promise(resolve => {
+    fn()
+      .then(resolve)
+      .catch(() => {
+        setTimeout(() => {
+          console.log('retrying...');
+          retry(fn, ms).then(resolve);
+        }, ms);
+      });
+  });
 
 describe('vizhub-io', () => {
-
   describe('multifilePad', () => {
     let browser;
     let page;
@@ -25,7 +25,10 @@ describe('vizhub-io', () => {
     it('should open page', async function() {
       browser = await puppeteer.launch(puppeteerOptions);
       page = await browser.newPage();
-      const response = await retry(() => page.goto('http://localhost:3000/multifilePad/abc'), 1000);
+      const response = await retry(
+        () => page.goto('http://localhost:3000/multifilePad/abc'),
+        1000
+      );
       assert.equal(response.status(), 200);
     }).timeout(60000);
 
@@ -52,7 +55,6 @@ describe('vizhub-io', () => {
     it('should close browser', async function() {
       await browser.close();
     });
-
   });
 });
 // Pad
