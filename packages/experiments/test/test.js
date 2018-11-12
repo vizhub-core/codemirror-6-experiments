@@ -1,14 +1,22 @@
 import puppeteer from 'puppeteer';
 import assert from 'assert';
 import { defaultData } from '../src/pages/multifilePad/getOrCreateMultifileDoc';
+//import { startServer } from '../src/server/startServer'
 
 const puppeteerOptions = { args: ['--no-sandbox'] };
+
+const port = 3000;
 
 describe('vizhub-io', () => {
   describe('multifilePad', () => {
     let browser;
     let page;
     let serverRenderedData;
+    //let server;
+
+    //it('should start server', async function() {
+    //  server = await startServer(port);
+    //});
 
     it('should open page without JS', async function() {
       browser = await puppeteer.launch(puppeteerOptions);
@@ -17,8 +25,7 @@ describe('vizhub-io', () => {
       // Disable JS so we can test server rendering.
       await page.setJavaScriptEnabled(false);
 
-      const response = await page.goto('http://localhost:3000/multifilePad/abc');
-      assert.equal(response.status(), 200);
+      await page.goto(`http://localhost:${port}/multifilePad/abc`);
     });
 
     it('should server-render Page DOM', async function() {
@@ -30,10 +37,10 @@ describe('vizhub-io', () => {
       // Enable JS so we can test client side JS activity.
       await page.setJavaScriptEnabled(true);
 
-      const response = await page.goto('http://localhost:3000/multifilePad/abc');
+      await page.goto(`http://localhost:${port}/multifilePad/abc?file=index.js`);
 
       // Verify 304 not modified as page has not changed.
-      assert.equal(response.status(), 304);
+      //assert.equal(response.status(), 304);
     });
 
     it('should render serverRenderedData on the server', async function() {
@@ -45,8 +52,12 @@ describe('vizhub-io', () => {
       assert.equal(serverRenderedData.route, 'multifilePad');
     });
 
-    it('should render id in serverRenderedData', async function() {
-      assert.equal(serverRenderedData.id, 'abc');
+    it('should render params in serverRenderedData', async function() {
+      assert.deepEqual(serverRenderedData.params, { id: 'abc' });
+    });
+
+    it('should render query in serverRenderedData', async function() {
+      assert.deepEqual(serverRenderedData.query, { file: 'index.js' });
     });
 
     it('should render shareDBSnapshot in serverRenderedData', async function() {
@@ -61,8 +72,13 @@ describe('vizhub-io', () => {
     });
 
     it('should close browser', async function() {
+      await page.close();
       await browser.close();
     });
+
+    //it('should close server', function() {
+    //  //server.close();
+    //});
   });
 });
 // Pad
