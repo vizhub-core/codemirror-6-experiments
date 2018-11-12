@@ -20,7 +20,7 @@ export const startServer = port => {
 
   const app = express();
   app.use('/', pagesServer(connection));
-  app.use('/build', express.static('build/client'));
+  app.use('/build', express.static(__dirname + '/../../build/client'));
 
   const server = http.createServer(app);
 

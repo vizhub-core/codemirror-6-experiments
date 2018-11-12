@@ -3,8 +3,6 @@ import assert from 'assert';
 import { defaultData } from '../src/pages/multifilePad/getOrCreateMultifileDoc';
 import { startServer } from '../src/server/startServer'
 
-const puppeteerOptions = {};// args: ['--no-sandbox'] };
-
 const port = 5000;
 
 describe('vizhub-io', () => {
@@ -16,7 +14,7 @@ describe('vizhub-io', () => {
 
     before(async function() {
       server = await startServer(port);
-      browser = await puppeteer.launch(puppeteerOptions);
+      browser = await puppeteer.launch();
       page = await browser.newPage();
     });
 
@@ -71,15 +69,9 @@ describe('vizhub-io', () => {
       await page.waitFor('.test-client-render');
     });
 
-    it('should close browser', async function() {
+    after(async function() {
       await browser.close();
-    });
-
-    after(done => {
-
-      server.close((err) => {
-        done();
-      });
+      await new Promise(resolve => server.close(resolve));
     });
   });
 });
