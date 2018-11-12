@@ -14,22 +14,17 @@ import { historyKeymap } from '../../client/historyKeymap';
 import { indentationKeymap } from '../../client/indentationKeymap';
 
 export const createView = options => {
-  const {
-    doc,
-    otPlugin
-  } = options;
+  const { doc, otPlugin } = options;
 
-  const mode = legacyMode(javascript({ indentUnit: 2 }, {}))
+  const mode = legacyMode(javascript({ indentUnit: 2 }, {}));
 
-  let plugins = [
-    mode
-  ];
+  let plugins = [mode];
 
   if (process.browser) {
     plugins = plugins.concat([
       gutter(),
       history(),
-      matchBrackets({decorationsPlugin: mode}),
+      matchBrackets({ decorationsPlugin: mode }),
       keymap(historyKeymap()),
       keymap(indentationKeymap(mode)),
       keymap(baseKeymap),
@@ -37,7 +32,7 @@ export const createView = options => {
     ]);
   }
 
-  const state = EditorState.create({ doc, plugins })
+  const state = EditorState.create({ doc, plugins });
 
   return new EditorView(state);
 };

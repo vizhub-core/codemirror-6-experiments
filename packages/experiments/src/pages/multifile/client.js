@@ -1,4 +1,3 @@
-import { select } from 'd3-selection';
 import { createView } from './demoView';
 
 import { h, render } from 'preact';

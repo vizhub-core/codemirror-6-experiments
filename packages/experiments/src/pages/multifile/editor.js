@@ -21,7 +21,7 @@ export class Editor extends Component {
     super();
   }
 
-  setSelectedFileName({ files, selectedFileName: newSelectedFileName}) {
+  setSelectedFileName({ files, selectedFileName: newSelectedFileName }) {
     const { selectedFileName } = this;
 
     if (selectedFileName) {
@@ -35,7 +35,7 @@ export class Editor extends Component {
     newView.dispatch(newView.state.transaction.scrollIntoView());
 
     this.selectedFileName = newSelectedFileName;
-  };
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setSelectedFileName(nextProps);
@@ -50,6 +50,6 @@ export class Editor extends Component {
   }
 
   render() {
-    return <div />
+    return <div />;
   }
 }

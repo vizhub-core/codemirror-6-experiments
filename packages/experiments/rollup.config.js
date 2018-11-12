@@ -1,25 +1,23 @@
-import commonjs from 'rollup-plugin-commonjs'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import postcss from 'rollup-plugin-postcss'
+import commonjs from 'rollup-plugin-commonjs';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import postcss from 'rollup-plugin-postcss';
 import buble from 'rollup-plugin-buble';
-import { uglify } from "rollup-plugin-uglify";
-import { plugin as analyze } from 'rollup-plugin-analyzer'
+import { uglify } from 'rollup-plugin-uglify';
+import { plugin as analyze } from 'rollup-plugin-analyzer';
 
 const plugins = () => [
   postcss(),
   buble({
     // Support Preact JSX
-    jsx: 'h',
-    transforms: { forOf: false }
+    jsx: 'h'
   }),
   nodeResolve({
-
     // Required for the case of the 'event' module,
     // which the ShareDB client depends on.
-    preferBuiltins: false,
+    preferBuiltins: false
   }),
-  commonjs(),
-  uglify(),
+  commonjs()
+  //uglify(),
   // Uncomment to see what files are making the bundle large.
   //analyze({
   //  filter: module => module.percent > 3
@@ -42,11 +40,26 @@ const client = {
     sourcemap: true
   },
   plugins: plugins(),
-  onwarn,
+  onwarn
 };
 
 const server = {
-  external: ['jsdom', "@teamwork/websocket-json-stream", "codemirror-ot", "codemirror-theme-ubuntu", "d3-selection", "events", "express", "jsdom", "preact", "reconnecting-websocket", "sharedb", "ws", 'fs', 'http'],
+  external: [
+    'jsdom',
+    '@teamwork/websocket-json-stream',
+    'codemirror-ot',
+    'codemirror-theme-ubuntu',
+    'd3-selection',
+    'events',
+    'express',
+    'jsdom',
+    'preact',
+    'reconnecting-websocket',
+    'sharedb',
+    'ws',
+    'fs',
+    'http'
+  ],
   input: './src/server/index.js',
   output: {
     format: 'cjs',
@@ -57,4 +70,16 @@ const server = {
   onwarn
 };
 
-export default [ server, client ];
+const test = {
+  external: server.external.concat(['puppeteer', 'assert']),
+  input: './test/test.js',
+  output: {
+    format: 'cjs',
+    file: './build/test/bundle.js',
+    sourcemap: true
+  },
+  plugins: plugins(),
+  onwarn
+};
+
+export default [server, client, test];
