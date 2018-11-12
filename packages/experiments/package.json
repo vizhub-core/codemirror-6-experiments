@@ -8,7 +8,8 @@
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -w -c rollup.config.js",
     "start": "nodemon build/server/bundle.js -w build/server",
-    "test": "mocha ./build/test --watch"
+    "watch-test": "mocha ./build/test --watch",
+    "test": "mocha ./build/test"
   },
   "repository": {
     "type": "git",

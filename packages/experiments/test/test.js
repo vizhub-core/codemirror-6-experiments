@@ -1,32 +1,32 @@
 import puppeteer from 'puppeteer';
 import assert from 'assert';
 import { defaultData } from '../src/pages/multifilePad/getOrCreateMultifileDoc';
-//import { startServer } from '../src/server/startServer'
+import { startServer } from '../src/server/startServer'
 
-const puppeteerOptions = { args: ['--no-sandbox'] };
+const puppeteerOptions = {};// args: ['--no-sandbox'] };
 
-const port = 3000;
+const port = 5000;
 
 describe('vizhub-io', () => {
   describe('multifilePad', () => {
     let browser;
     let page;
     let serverRenderedData;
-    //let server;
+    let server;
 
-    //it('should start server', async function() {
-    //  server = await startServer(port);
-    //});
-
-    it('should open page without JS', async function() {
+    before(async function() {
+      server = await startServer(port);
       browser = await puppeteer.launch(puppeteerOptions);
       page = await browser.newPage();
+    });
+
+    it('should open page without JS', async function() {
 
       // Disable JS so we can test server rendering.
       await page.setJavaScriptEnabled(false);
 
       await page.goto(`http://localhost:${port}/multifilePad/abc`);
-    });
+    }).timeout(5000);
 
     it('should server-render Page DOM', async function() {
       await page.waitFor('.test-server-render');
@@ -72,13 +72,15 @@ describe('vizhub-io', () => {
     });
 
     it('should close browser', async function() {
-      await page.close();
       await browser.close();
     });
 
-    //it('should close server', function() {
-    //  //server.close();
-    //});
+    after(done => {
+
+      server.close((err) => {
+        done();
+      });
+    });
   });
 });
 // Pad
@@ -91,5 +93,3 @@ describe('vizhub-io', () => {
 // Multifile
 //   Switching between files shows different content
 //   Deleting a file then switching shows correct content
-// Index
-//   Content is server-rendered

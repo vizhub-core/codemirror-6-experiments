@@ -30,7 +30,9 @@ export const startServer = port => {
   });
 
   return new Promise(resolve => {
-    server.listen(port, resolve);
+    server.listen(port, () => {
+      resolve(server);
+    });
   });
 };
 
