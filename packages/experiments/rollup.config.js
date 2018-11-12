@@ -9,8 +9,7 @@ const plugins = () => [
   postcss(),
   buble({
     // Support Preact JSX
-    jsx: 'h',
-    transforms: { forOf: false }
+    jsx: 'h'
   }),
   nodeResolve({
     // Required for the case of the 'event' module,
