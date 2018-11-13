@@ -73,7 +73,7 @@ describe('vizhub-io', () => {
       await browser.close();
       await new Promise(resolve => server.close(resolve));
     });
-  });
+  }).timeout(20000);
 });
 // Pad
 //   Server render CodeMirror
