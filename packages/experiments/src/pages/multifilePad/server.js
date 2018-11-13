@@ -20,14 +20,18 @@ export const server = connection => {
     getOrCreateMultifileDoc(connection, params.id).then(shareDBDoc => {
       const shareDBSnapshot = createShareDBSnapshot(shareDBDoc);
 
-      setServerRenderedData(dom, {
+      const serverRenderedData = {
         route,
         params,
         query,
         shareDBSnapshot
-      });
+      };
 
-      render(<Page />, root, root.firstElementChild);
+      setServerRenderedData(dom, serverRenderedData);
+
+      const Root = () => <Page serverRenderedData={serverRenderedData}/>;
+      render(<Root/>, root, root.firstElementChild);
+
       res.send(dom.serialize());
       shareDBDoc.destroy();
     });

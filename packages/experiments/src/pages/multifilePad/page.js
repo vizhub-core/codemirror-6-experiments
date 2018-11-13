@@ -1,7 +1,11 @@
 import { h } from 'preact';
+import { RenderingTestSentinel } from '../../renderingTestSentinel';
 
-export const Page = () => (
+export const Page = ({ serverRenderedData }) => (
   <div>
-    <div className={`test-${process.browser ? 'client' : 'server' }-render`}/>
+    <RenderingTestSentinel />
+    <pre>
+      { JSON.stringify(serverRenderedData) }
+    </pre>
   </div>
 );
