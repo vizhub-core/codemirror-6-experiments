@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import assert from 'assert';
 import { defaultData } from '../src/pages/multifilePad/defaultData';
-import { startServer } from '../src/server/startServer'
+import { startServer } from '../src/server/startServer';
 
 const port = 5000;
 
@@ -19,7 +19,6 @@ describe('vizhub-io', () => {
     });
 
     it('should open page without JS', async function() {
-
       // Disable JS so we can test server rendering.
       await page.setJavaScriptEnabled(false);
 
@@ -31,11 +30,12 @@ describe('vizhub-io', () => {
     });
 
     it('should open page with JS', async function() {
-
       // Enable JS so we can test client side JS activity.
       await page.setJavaScriptEnabled(true);
 
-      await page.goto(`http://localhost:${port}/multifilePad/abc?file=index.js`);
+      await page.goto(
+        `http://localhost:${port}/multifilePad/abc?file=index.js`
+      );
 
       // Verify 304 not modified as page has not changed.
       //assert.equal(response.status(), 304);

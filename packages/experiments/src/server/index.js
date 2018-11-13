@@ -1,4 +1,4 @@
-import { startServer } from './startServer'
+import { startServer } from './startServer';
 
 const port = 3000;
 

@@ -35,4 +35,3 @@ export const startServer = port => {
     });
   });
 };
-

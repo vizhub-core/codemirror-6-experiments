@@ -8,9 +8,7 @@ export class Page extends Component {
     return (
       <div>
         <RenderingTestSentinel />
-        <pre>
-          { JSON.stringify(shareDBDoc.data) }
-        </pre>
+        <pre>{JSON.stringify(shareDBDoc.data)}</pre>
       </div>
     );
   }

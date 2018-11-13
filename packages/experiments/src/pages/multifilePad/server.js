@@ -20,14 +20,21 @@ export const server = connection => {
     const { params, query } = req;
     const { id } = params;
 
-    fetchOrCreateShareDBDoc({ connection, collection, id, defaultData })
-      .then(shareDBDoc => {
+    fetchOrCreateShareDBDoc({ connection, collection, id, defaultData }).then(
+      shareDBDoc => {
         render(<Page shareDBDoc={shareDBDoc} />, root, root.firstElementChild);
         const shareDBSnapshot = createShareDBSnapshot(shareDBDoc);
-        setServerRenderedData(dom, { route, params, query, shareDBSnapshot, collection });
+        setServerRenderedData(dom, {
+          route,
+          params,
+          query,
+          shareDBSnapshot,
+          collection
+        });
         res.send(dom.serialize());
         shareDBDoc.destroy();
-      });
+      }
+    );
   });
   return router;
 };
