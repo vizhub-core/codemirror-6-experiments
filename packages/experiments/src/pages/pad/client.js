@@ -1,4 +1,3 @@
-import { opsToTransaction } from 'codemirror-ot';
 import { createView } from './demoView';
 import { hydrateEditor } from './hydrateEditor';
 import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';

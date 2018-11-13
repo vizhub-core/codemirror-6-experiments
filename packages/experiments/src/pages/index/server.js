@@ -10,7 +10,7 @@ const dom = createDom(html);
 const document = dom.window.document;
 const preactRoot = document.getElementById('preact-root');
 
-export const server = connection => {
+export const server = () => {
   const router = Router();
   router.get('/', (req, res) => {
     setServerRenderedData(dom, { route });

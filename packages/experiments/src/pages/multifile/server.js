@@ -6,7 +6,7 @@ import { createDom } from '../../server/dom';
 const route = 'multifile';
 const dom = createDom(html);
 
-export const server = connection => {
+export const server = () => {
   const router = Router();
   router.get('/', (req, res) => {
     setServerRenderedData(dom, { route });

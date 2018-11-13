@@ -2,8 +2,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import buble from 'rollup-plugin-buble';
-import { uglify } from 'rollup-plugin-uglify';
-import { plugin as analyze } from 'rollup-plugin-analyzer';
+// import { uglify } from 'rollup-plugin-uglify';
+// import { plugin as analyze } from 'rollup-plugin-analyzer';
 
 const plugins = () => [
   postcss(),

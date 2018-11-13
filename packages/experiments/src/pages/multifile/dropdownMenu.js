@@ -6,7 +6,11 @@ export const DropdownMenu = props => {
   return (
     <select onChange={e => onOptionClicked(e.target.value)}>
       {options.map(option => (
-        <option value={option} selected={option === selectedOption}>
+        <option
+          key={option}
+          value={option}
+          selected={option === selectedOption}
+        >
           {option}
         </option>
       ))}
