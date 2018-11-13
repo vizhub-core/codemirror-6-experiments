@@ -1,8 +1,13 @@
-import { defaultData } from './defaultData';
+export const fetchOrCreateShareDBDoc = options => {
+  const {
+    connection,
+    collection,
+    id,
+    defaultData
+  } = options;
 
-export const getOrCreateMultifileDoc = (connection, id) =>
-  new Promise((resolve, reject) => {
-    const shareDBDoc = connection.get('multifile', id);
+  return new Promise((resolve, reject) => {
+    const shareDBDoc = connection.get(collection, id);
     shareDBDoc.fetch(err => {
       if (err) {
         reject(err);
@@ -16,3 +21,4 @@ export const getOrCreateMultifileDoc = (connection, id) =>
       }
     });
   });
+};

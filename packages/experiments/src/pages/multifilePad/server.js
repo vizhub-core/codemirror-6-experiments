@@ -3,7 +3,8 @@ import { h, render } from 'preact';
 import { html } from './html';
 import { createDom } from '../../server/dom';
 import { setServerRenderedData } from '../html';
-import { getOrCreateMultifileDoc } from './getOrCreateMultifileDoc';
+import { fetchOrCreateShareDBDoc } from './fetchOrCreateShareDBDoc';
+import { defaultData } from './defaultData';
 import { createShareDBSnapshot } from '../../server/createShareDBSnapshot';
 import { Page } from './page';
 
@@ -15,28 +16,18 @@ const root = document.getElementById('root');
 export const server = connection => {
   const router = Router();
   router.get('/:id', (req, res) => {
+    const collection = 'multifile';
     const { params, query } = req;
+    const { id } = params;
 
-    getOrCreateMultifileDoc(connection, params.id).then(shareDBDoc => {
-      const shareDBSnapshot = createShareDBSnapshot(shareDBDoc);
-
-      const serverRenderedData = {
-        route,
-        params,
-        query,
-        shareDBSnapshot
-      };
-
-      const Root = () => (
-        <Page shareDBDoc={shareDBDoc} />
-      );
-      render(<Root />, root, root.firstElementChild);
-
-      setServerRenderedData(dom, serverRenderedData);
-
-      res.send(dom.serialize());
-      shareDBDoc.destroy();
-    });
+    fetchOrCreateShareDBDoc({ connection, collection, id, defaultData })
+      .then(shareDBDoc => {
+        render(<Page shareDBDoc={shareDBDoc} />, root, root.firstElementChild);
+        const shareDBSnapshot = createShareDBSnapshot(shareDBDoc);
+        setServerRenderedData(dom, { route, params, query, shareDBSnapshot, collection });
+        res.send(dom.serialize());
+        shareDBDoc.destroy();
+      });
   });
   return router;
 };
