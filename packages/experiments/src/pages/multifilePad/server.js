@@ -27,10 +27,12 @@ export const server = connection => {
         shareDBSnapshot
       };
 
-      setServerRenderedData(dom, serverRenderedData);
+      const Root = () => (
+        <Page shareDBDoc={shareDBDoc} />
+      );
+      render(<Root />, root, root.firstElementChild);
 
-      const Root = () => <Page serverRenderedData={serverRenderedData}/>;
-      render(<Root/>, root, root.firstElementChild);
+      setServerRenderedData(dom, serverRenderedData);
 
       res.send(dom.serialize());
       shareDBDoc.destroy();

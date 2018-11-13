@@ -4,14 +4,12 @@ import { shareDBConnection } from '../../client/shareDBConnection';
 
 export class Page extends Component {
   render(props, state) {
-    const { serverRenderedData } = props;
-    const { shareDBSnapshot} = serverRenderedData;
-    console.log(shareDBSnapshot);
+    const { shareDBDoc } = props;
     return (
       <div>
         <RenderingTestSentinel />
         <pre>
-          { JSON.stringify(serverRenderedData) }
+          { JSON.stringify(shareDBDoc.data) }
         </pre>
       </div>
     );
