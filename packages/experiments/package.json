@@ -4,7 +4,7 @@
   "description": "Experiments.",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --single-quote '**/*.js' --write",
+    "prettier": "prettier --single-quote '**/*.js' '!build/**' --write",
     "build": "rollup -c rollup.config.js",
     "build-watch": "rollup -w -c rollup.config.js",
     "test": "cd build/test; mocha bundle.js",
