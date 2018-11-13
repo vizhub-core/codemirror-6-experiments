@@ -1,11 +1,16 @@
-import { h } from 'preact';
+import { h, Component } from 'preact';
 import { RenderingTestSentinel } from '../../renderingTestSentinel';
 
-export const Page = ({ serverRenderedData }) => (
-  <div>
-    <RenderingTestSentinel />
-    <pre>
-      { JSON.stringify(serverRenderedData) }
-    </pre>
-  </div>
-);
+export class Page extends Component {
+  render(props, state) {
+    const { serverRenderedData } = props;
+    return (
+      <div>
+        <RenderingTestSentinel />
+        <pre>
+          { JSON.stringify(serverRenderedData) }
+        </pre>
+      </div>
+    );
+  }
+}

@@ -9,7 +9,7 @@ import { savingSaved } from '../../client/savingSaved';
 const { snapshot } = window.serverRenderedData;
 
 export const client = params => {
-  const shareDBDoc = shareDBConnection.get('examples', params.id);
+  const shareDBDoc = shareDBConnection().get('examples', params.id);
 
   shareDBDoc.ingestSnapshot(
     snapshot,
