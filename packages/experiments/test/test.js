@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import assert from 'assert';
-import { defaultData } from '../src/pages/multifilePad/getOrCreateMultifileDoc';
+import { defaultData } from '../src/pages/multifilePad/defaultData';
 import { startServer } from '../src/server/startServer'
 
 const port = 5000;

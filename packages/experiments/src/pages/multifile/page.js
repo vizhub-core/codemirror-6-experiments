@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { DropdownMenu } from './dropdownMenu';
 import { Editor } from './editor';
-import { exampleFiles } from './exampleFiles';
+import { exampleFiles } from '../../exampleFiles';
 
 //const setSelectedFileName = newSelectedFileName => {
 //  console.log({ newSelectedFileName });
