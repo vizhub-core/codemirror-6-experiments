@@ -9,8 +9,8 @@ describe('vizhub-io', () => {
   describe('multifilePad', () => {
     let browser;
     let page;
-    let serverRenderedData;
     let server;
+    let serverRenderedData;
 
     before(async function() {
       server = await startServer(port);
@@ -27,6 +27,13 @@ describe('vizhub-io', () => {
 
     it('should server-render Page DOM', async function() {
       await page.waitFor('.test-server-render');
+    });
+
+    it('should server-render menu with default selected file', async function() {
+      const selectedFile = await page.evaluate(() =>
+        document.querySelector('.test-dropdown-menu select').value
+      );
+      assert.equal(selectedFile, 'index.html');
     });
 
     it('should open page with JS', async function() {
