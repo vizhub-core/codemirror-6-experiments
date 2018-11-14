@@ -5,7 +5,7 @@ import { createDom } from '../../server/dom';
 import { setServerRenderedData } from '../html';
 import { defaultData } from './defaultData';
 import { createShareDBSnapshot } from '../../server/createShareDBSnapshot';
-import { fetchOrCreateShareDBDoc } from '../../fetchOrCreateShareDBDoc';
+import { fetchOrCreateShareDBDoc } from '../../server/fetchOrCreateShareDBDoc';
 import { Page } from './page';
 
 const route = 'multifilePad';
