@@ -12,12 +12,21 @@ describe('vizhub-io', () => {
     let page;
     let server;
     let serverRenderedData;
+    let id = 'abc';
 
     async function selectedDropdownOption() {
       return await page.evaluate(
         () => document.querySelector('.test-dropdown-menu select').value
       );
     }
+
+    const url = ({id, file}) => [
+      'http://localhost:',
+      port,
+      '/multifilePad/',
+      id,
+      file ? `?file=${file}` : ''
+    ].join('');
 
     before(async function() {
       server = await startServer(port);
@@ -29,7 +38,7 @@ describe('vizhub-io', () => {
       // Disable JS so we can test server rendering.
       await page.setJavaScriptEnabled(false);
 
-      await page.goto(`http://localhost:${port}/multifilePad/abc`);
+      await page.goto(url({ id }));
     }).timeout(5000);
 
     it('should server-render Page DOM', async function() {
@@ -48,9 +57,7 @@ describe('vizhub-io', () => {
       // Enable JS so we can test client side JS activity.
       await page.setJavaScriptEnabled(true);
 
-      await page.goto(
-        `http://localhost:${port}/multifilePad/abc?file=index.js`
-      );
+      await page.goto(url({ id }));
 
       // Verify 304 not modified as page has not changed.
       //assert.equal(response.status(), 304);
@@ -69,10 +76,6 @@ describe('vizhub-io', () => {
       assert.deepEqual(serverRenderedData.params, { id: 'abc' });
     });
 
-    it('should render query in serverRenderedData', async function() {
-      assert.deepEqual(serverRenderedData.query, { file: 'index.js' });
-    });
-
     it('should render shareDBSnapshot in serverRenderedData', async function() {
       assert.deepEqual(serverRenderedData.shareDBSnapshot, {
         v: 1,
@@ -86,6 +89,17 @@ describe('vizhub-io', () => {
 
     it('should client-render menu with default selected file', async function() {
       assert.equal(await selectedDropdownOption(), defaultSelectedFileName);
+    });
+
+    const file = 'index.js';
+    it('should render query in serverRenderedData', async function() {
+      await page.goto(url({ id, file }));
+      serverRenderedData = await page.evaluate(() => window.serverRenderedData);
+      assert.deepEqual(serverRenderedData.query, { file });
+    });
+
+    it('should client-render menu with selected file from query', async function() {
+      assert.equal(await selectedDropdownOption(), file);
     });
 
     after(async function() {

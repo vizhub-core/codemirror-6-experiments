@@ -4,13 +4,13 @@ import { shareDBConnection } from '../../client/shareDBConnection';
 import { errorLog } from '../../client/errorLog';
 
 export const client = () => {
-  const { params, shareDBSnapshot, collection } = window.serverRenderedData;
+  const { params, query, shareDBSnapshot, collection } = window.serverRenderedData;
   const shareDBDoc = shareDBConnection().get(collection, params.id);
   shareDBDoc.ingestSnapshot(
     shareDBSnapshot,
     errorLog(() => {
       const root = document.getElementById('root');
-      render(<Page shareDBDoc={shareDBDoc} />, root, root.firstElementChild);
+      render(<Page shareDBDoc={shareDBDoc} query={query} />, root, root.firstElementChild);
       shareDBDoc.subscribe(errorLog);
     })
   );
