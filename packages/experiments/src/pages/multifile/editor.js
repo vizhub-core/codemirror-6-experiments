@@ -1,10 +1,13 @@
 import { h, Component } from 'preact';
 import { createView } from '../../demoView';
 
-const getFile = (files, fileName) => files.find(file => file.name === fileName);
+// TODO handle deleting files - update path for all views.
 
 const views = {};
-const getOrCreateView = selectedFile => {
+const getOrCreateView = (files, fileName) => {
+  const selectedFile = files
+    .find(file => file.name === fileName);
+
   if (!views[selectedFile.name]) {
     views[selectedFile.name] = createView({
       doc: selectedFile.text
@@ -13,29 +16,32 @@ const getOrCreateView = selectedFile => {
   return views[selectedFile.name];
 };
 
-const viewForFileName = (files, fileName) =>
-  getOrCreateView(getFile(files, fileName));
-
 // Technique from https://github.com/developit/preact/wiki/External-DOM-Mutations
 export class Editor extends Component {
-  constructor() {
-    super();
-  }
 
-  setSelectedFileName({ files, selectedFileName: newSelectedFileName }) {
-    const { selectedFileName } = this;
+  setSelectedFileName(props) {
+    const {
+      files,
+      selectedFileName
+    } = props;
 
-    if (selectedFileName) {
-      const oldView = viewForFileName(files, selectedFileName);
+    const { previouslySelectedFileName } = this;
+
+    if (previouslySelectedFileName === selectedFileName) {
+      return;
+    }
+
+    if (previouslySelectedFileName) {
+      const oldView = getOrCreateView(files, previouslySelectedFileName);
       oldView.dom.remove();
     }
 
-    const newView = viewForFileName(files, newSelectedFileName);
+    const newView = getOrCreateView(files, selectedFileName);
     this.base.appendChild(newView.dom);
 
     newView.dispatch(newView.state.transaction.scrollIntoView());
 
-    this.selectedFileName = newSelectedFileName;
+    this.previouslySelectedFileName = selectedFileName;
   }
 
   componentWillReceiveProps(nextProps) {

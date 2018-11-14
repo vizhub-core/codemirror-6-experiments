@@ -3,18 +3,6 @@ import { DropdownMenu } from './dropdownMenu';
 import { Editor } from './editor';
 import { exampleFiles } from '../../exampleFiles';
 
-//const setSelectedFileName = newSelectedFileName => {
-//  console.log({ newSelectedFileName });
-//  //if (selectedFileName) {
-//  //  const oldView = viewForFileName(selectedFileName);
-//  //  oldView.dom.remove();
-//  //}
-//  //const newView = viewForFileName(newSelectedFileName);
-//  //editorDiv.appendChild(newView.dom);
-//  //newView.dispatch(newView.state.transaction.scrollIntoView());
-//  //selectedFileName = newSelectedFileName;
-//};
-
 export class Page extends Component {
   constructor() {
     super();
@@ -23,6 +11,7 @@ export class Page extends Component {
     this.setSelectedFileName = selectedFileName => {
       this.setState({ selectedFileName });
     };
+    //this.getOrCreateView = getOrCreateView.bind(this);
   }
   render() {
     const {
