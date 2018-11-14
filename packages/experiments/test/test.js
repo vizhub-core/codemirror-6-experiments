@@ -54,6 +54,9 @@ describe('vizhub-io', () => {
     //  assert.equal(await selectedDropdownOption(), defaultSelectedFileName);
     //});
 
+    // TODO test that the file content for the file name in the query is rendered.
+    // (currently it always appears to render index.html, no matter what file is in query).
+
     it('should open page with JS', async function() {
       // Enable JS so we can test client side JS activity.
       await page.setJavaScriptEnabled(true);
@@ -103,10 +106,15 @@ describe('vizhub-io', () => {
       assert.equal(await selectedDropdownOption(), file);
     });
 
+    // TODO test real-time synchronization
+    // TODO test that synchronization only dispatches to the expected CodeMirror instances (path checking)
+    // TODO test persistence of changes
+
     after(async function() {
       await browser.close();
       await new Promise(resolve => server.close(resolve));
     });
+
   }).timeout(20000);
 });
 // Pad

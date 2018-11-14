@@ -3,6 +3,18 @@ import { otPlugin, opsToTransaction } from 'codemirror-ot';
 // TODO unify with implementation in codemirror-ot tests.
 const atPath = (obj, path) => path.reduce((d, key) => d[key], obj);
 
+// TODO research if this is already implemented elsewhere in the ShareDB universe.
+const pathMatches = (op, path) => {
+  if (op.length !== 1) {
+    return false;
+  }
+  const opPath = op[0].p;
+  if (opPath.length < path.length) {
+    return false;
+  }
+  return path.every((pathEntry, i) => pathEntry === opPath[i]);
+};
+
 export const CodeMirrorShareDBBinding = options => {
   const {
     shareDBDoc,
@@ -45,7 +57,7 @@ export const CodeMirrorShareDBBinding = options => {
 
   if (process.browser) {
     shareDBDoc.on('op', (op, originatedLocally) => {
-      if (!originatedLocally) {
+      if (!originatedLocally && pathMatches(op, path)) {
         applyingOpTransaction = true;
         view.dispatch(opsToTransaction(path, view.state, op));
         applyingOpTransaction = false;
