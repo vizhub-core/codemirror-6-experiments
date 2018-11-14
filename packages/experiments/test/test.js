@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer';
 import assert from 'assert';
 import { defaultData } from '../src/pages/multifilePad/defaultData';
 import { startServer } from '../src/server/startServer';
+import { defaultSelectedFileName } from '../src/pages/multifilePad/page';
 
 const port = 5000;
 
@@ -12,16 +13,21 @@ describe('vizhub-io', () => {
     let server;
     let serverRenderedData;
 
+    async function selectedDropdownOption() {
+      return await page.evaluate(
+        () => document.querySelector('.test-dropdown-menu select').value
+      );
+    }
+
     before(async function() {
       server = await startServer(port);
       browser = await puppeteer.launch();
       page = await browser.newPage();
     });
 
+    // Disable JS so we can test server rendering.
     it('should open page without JS', async function() {
-      // Disable JS so we can test server rendering.
       await page.setJavaScriptEnabled(false);
-
       await page.goto(`http://localhost:${port}/multifilePad/abc`);
     }).timeout(5000);
 
@@ -29,23 +35,23 @@ describe('vizhub-io', () => {
       await page.waitFor('.test-server-render');
     });
 
-    it('should server-render menu with default selected file', async function() {
-      const selectedFile = await page.evaluate(
-        () => document.querySelector('.test-dropdown-menu select').value
-      );
-      assert.equal(selectedFile, 'index.html');
-    });
+    //it('should server-render menu with default selected file', async function() {
+    //  assert.equal(await selectedDropdownOption(), defaultSelectedFileName);
+    //});
 
+    //it('should server-render menu with selected file from query', async function() {
+    //  await page.goto(
+    //    `http://localhost:${port}/multifilePad/abc?file=index.js`
+    //  );
+    //  assert.equal(await selectedDropdownOption(), 'index.js');
+    //});
+
+    // Enable JS so we can test client side JS activity.
     it('should open page with JS', async function() {
-      // Enable JS so we can test client side JS activity.
       await page.setJavaScriptEnabled(true);
-
       await page.goto(
         `http://localhost:${port}/multifilePad/abc?file=index.js`
       );
-
-      // Verify 304 not modified as page has not changed.
-      //assert.equal(response.status(), 304);
     });
 
     it('should render serverRenderedData on the server', async function() {

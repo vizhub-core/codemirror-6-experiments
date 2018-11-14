@@ -4,8 +4,15 @@ import { shareDBConnection } from '../../client/shareDBConnection';
 import { errorLog } from '../../client/errorLog';
 
 export const client = () => {
-  const { params, shareDBSnapshot, collection } = window.serverRenderedData;
+  const {
+    params,
+    shareDBSnapshot,
+    collection,
+    query
+  } = window.serverRenderedData;
+
   const shareDBDoc = shareDBConnection().get(collection, params.id);
+
   shareDBDoc.ingestSnapshot(
     shareDBSnapshot,
     errorLog(() => {

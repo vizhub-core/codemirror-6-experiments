@@ -4,13 +4,12 @@ export const DropdownMenu = props => {
   const { options, onOptionClicked, selectedOption } = props;
 
   return (
-    <select onChange={e => onOptionClicked(e.target.value)}>
+    <select
+      onChange={e => onOptionClicked(e.target.value)}
+      value={selectedOption}
+    >
       {options.map(option => (
-        <option
-          key={option}
-          value={option}
-          selected={option === selectedOption}
-        >
+        <option key={option} value={option}>
           {option}
         </option>
       ))}

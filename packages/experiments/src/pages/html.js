@@ -9,6 +9,7 @@ export const htmlRoot = ({ title, body }) => `
       <title>${title}</title>
       <style>${criticalCSS}</style>
       <script id="server-rendered-data"></script>
+      <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma@0.7.2/css/bulma.min.css">
     </head>
     <body>
       ${body}
