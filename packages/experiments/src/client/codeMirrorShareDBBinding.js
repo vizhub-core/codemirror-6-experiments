@@ -1,5 +1,8 @@
 import { otPlugin, opsToTransaction } from 'codemirror-ot';
 
+// TODO unify with implementation in codemirror-ot tests.
+const atPath = (obj, path) => path.reduce((d, key) => d[key], obj);
+
 export const CodeMirrorShareDBBinding = options => {
   const {
     shareDBDoc,
@@ -8,40 +11,47 @@ export const CodeMirrorShareDBBinding = options => {
     opBatchInterval = 500 // Milliseconds between op batches.
   } = options;
 
-  let opsQueue = [];
-  setInterval(() => {
-    if (opsQueue.length) {
-      shareDBDoc.submitOp(opsQueue, err => {
-        if (err) {
-          throw err;
-        }
-      });
-      opsQueue = [];
-    }
-  }, opBatchInterval);
-
+  let otPluginBrowser;
   let applyingOpTransaction = false;
-  const emitOps = ops => {
-    if (!applyingOpTransaction) {
-      opsQueue = opsQueue.concat(ops);
-    }
-  };
 
-  // TODO use path here.
-  const doc = shareDBDoc.data;
+  if (process.browser) {
+    let opsQueue = [];
+    setInterval(() => {
+      if (opsQueue.length) {
+        shareDBDoc.submitOp(opsQueue, err => {
+          if (err) {
+            throw err;
+          }
+        });
+        opsQueue = [];
+      }
+    }, opBatchInterval);
+
+    const emitOps = ops => {
+      if (!applyingOpTransaction) {
+        opsQueue = opsQueue.concat(ops);
+      }
+    };
+
+    otPluginBrowser = otPlugin(path, emitOps);
+  }
+
+  const doc = atPath(shareDBDoc.data, path);
 
   const view = createView({
-    otPlugin: otPlugin(path, emitOps),
+    otPlugin: otPluginBrowser,
     doc
   });
 
-  shareDBDoc.on('op', (op, originatedLocally) => {
-    if (!originatedLocally) {
-      applyingOpTransaction = true;
-      view.dispatch(opsToTransaction(path, view.state, op));
-      applyingOpTransaction = false;
-    }
-  });
+  if (process.browser) {
+    shareDBDoc.on('op', (op, originatedLocally) => {
+      if (!originatedLocally) {
+        applyingOpTransaction = true;
+        view.dispatch(opsToTransaction(path, view.state, op));
+        applyingOpTransaction = false;
+      }
+    });
+  }
 
   return view;
 };

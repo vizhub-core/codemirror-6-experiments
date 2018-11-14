@@ -17,23 +17,16 @@ const getFileIndex = (files, fileName) =>
     .map((file, i) => ({ file, i }))
     .find(({file}) => file.name === fileName)
     .i;
-//
-//const getOrCreateView = shareDBDoc => function(files, fileName) {
-//  if (!this.views[fileName]) {
-//    //this.views[fileName] = CodeMirrorShareDBBinding({
-//    //  shareDBDoc,
-//    //  createView
-//    //});
-//  }
-//  return this.views[fileName];
-//};
 
-const getOrCreateView = function(files, fileName) {
+const getOrCreateView = shareDBDoc => function(files, fileName) {
   if (!this.views[fileName]) {
     const fileIndex = getFileIndex(files, fileName);
-    console.log({fileIndex});
-    this.views[fileName] = createView({
-      doc: files.find(file => file.name === fileName).text
+    const path = ['files', fileIndex, 'text'];
+
+    this.views[fileName] = CodeMirrorShareDBBinding({
+      path,
+      shareDBDoc,
+      createView
     });
   }
   return this.views[fileName];
@@ -42,14 +35,15 @@ const getOrCreateView = function(files, fileName) {
 export class Page extends Component {
   constructor(props) {
     super();
-    const { query } = props;
+    const { query, shareDBDoc } = props;
+
     this.state.selectedFileName = query.file || defaultSelectedFileName;
     this.setSelectedFileName = selectedFileName => {
       this.setState({ selectedFileName });
     };
 
     this.views = {};
-    this.getOrCreateView = getOrCreateView.bind(this);
+    this.getOrCreateView = getOrCreateView(shareDBDoc).bind(this);
   }
   render(props, state) {
     const { shareDBDoc } = props;
