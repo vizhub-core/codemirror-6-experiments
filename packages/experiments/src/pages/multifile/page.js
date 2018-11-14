@@ -4,7 +4,7 @@ import { Editor } from '../../editor';
 import { exampleFiles } from '../../exampleFiles';
 import { createView } from '../../demoView';
 
-const getOrCreateView = function (files, fileName) {
+const getOrCreateView = function(files, fileName) {
   if (!this.views[fileName]) {
     this.views[fileName] = createView({
       doc: files.find(file => file.name === fileName).text

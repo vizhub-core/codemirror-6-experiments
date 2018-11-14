@@ -23,26 +23,28 @@ export const server = connection => {
     const { id } = params;
     const collection = 'examples';
 
-    fetchOrCreateShareDBDoc({connection, id, collection, defaultData}).then(shareDBDoc => {
-      global.document = document;
-      const doc = shareDBDoc.data;
-      hydrateEditor(createView({ doc }));
+    fetchOrCreateShareDBDoc({ connection, id, collection, defaultData }).then(
+      shareDBDoc => {
+        global.document = document;
+        const doc = shareDBDoc.data;
+        hydrateEditor(createView({ doc }));
 
-      // Make the content non-interactive until the JS loads.
-      // Otherwise edits made before JS loads will be lost.
-      document
-        .querySelector('.CodeMirror-content')
-        .removeAttribute('contenteditable');
+        // Make the content non-interactive until the JS loads.
+        // Otherwise edits made before JS loads will be lost.
+        document
+          .querySelector('.CodeMirror-content')
+          .removeAttribute('contenteditable');
 
-      // This snapshot of the ShareDB document is used to
-      // initialize the document in the client.
-      const snapshot = { v: shareDBDoc.version, data: shareDBDoc.data };
+        // This snapshot of the ShareDB document is used to
+        // initialize the document in the client.
+        const snapshot = { v: shareDBDoc.version, data: shareDBDoc.data };
 
-      setServerRenderedData(dom, { route, params, snapshot });
+        setServerRenderedData(dom, { route, params, snapshot });
 
-      res.send(dom.serialize());
-      shareDBDoc.destroy();
-    });
+        res.send(dom.serialize());
+        shareDBDoc.destroy();
+      }
+    );
   });
   return router;
 };

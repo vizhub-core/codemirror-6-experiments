@@ -22,7 +22,6 @@ export class Page extends Component {
     //this.getOrCreateView = getOrCreateView.bind(this);
   }
   render(props, state) {
-
     const { shareDBDoc } = props;
     const { files } = presentShareDBDoc(shareDBDoc);
     const { setSelectedFileName } = this;
@@ -31,7 +30,7 @@ export class Page extends Component {
     return (
       <div>
         <RenderingTestSentinel />
-        <div className='test-dropdown-menu'>
+        <div className="test-dropdown-menu">
           <DropdownMenu
             options={files.map(file => file.name)}
             onOptionClicked={setSelectedFileName}

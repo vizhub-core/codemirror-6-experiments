@@ -30,8 +30,8 @@ describe('vizhub-io', () => {
     });
 
     it('should server-render menu with default selected file', async function() {
-      const selectedFile = await page.evaluate(() =>
-        document.querySelector('.test-dropdown-menu select').value
+      const selectedFile = await page.evaluate(
+        () => document.querySelector('.test-dropdown-menu select').value
       );
       assert.equal(selectedFile, 'index.html');
     });
