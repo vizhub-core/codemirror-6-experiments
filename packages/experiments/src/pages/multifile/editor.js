@@ -1,30 +1,16 @@
 import { h, Component } from 'preact';
-import { createView } from '../../demoView';
 
 // TODO handle deleting files - update path for all views.
 
-const views = {};
-const getOrCreateView = (files, fileName) => {
-  const selectedFile = files
-    .find(file => file.name === fileName);
-
-  if (!views[selectedFile.name]) {
-    views[selectedFile.name] = createView({
-      doc: selectedFile.text
-    });
-  }
-  return views[selectedFile.name];
-};
 
 // Technique from https://github.com/developit/preact/wiki/External-DOM-Mutations
 export class Editor extends Component {
+  constructor() {
+    super();
+  }
 
   setSelectedFileName(props) {
-    const {
-      files,
-      selectedFileName
-    } = props;
-
+    const { files, selectedFileName, getOrCreateView} = props;
     const { previouslySelectedFileName } = this;
 
     if (previouslySelectedFileName === selectedFileName) {

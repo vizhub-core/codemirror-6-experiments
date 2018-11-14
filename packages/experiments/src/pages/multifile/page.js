@@ -2,6 +2,16 @@ import { h, Component } from 'preact';
 import { DropdownMenu } from './dropdownMenu';
 import { Editor } from './editor';
 import { exampleFiles } from '../../exampleFiles';
+import { createView } from '../../demoView';
+
+const getOrCreateView = function (files, fileName) {
+  if (!this.views[fileName]) {
+    this.views[fileName] = createView({
+      doc: files.find(file => file.name === fileName).text
+    });
+  }
+  return this.views[fileName];
+};
 
 export class Page extends Component {
   constructor() {
@@ -11,12 +21,15 @@ export class Page extends Component {
     this.setSelectedFileName = selectedFileName => {
       this.setState({ selectedFileName });
     };
-    //this.getOrCreateView = getOrCreateView.bind(this);
+
+    this.views = {};
+    this.getOrCreateView = getOrCreateView.bind(this);
   }
   render() {
     const {
       setSelectedFileName,
-      state: { selectedFileName, files }
+      state: { selectedFileName, files },
+      getOrCreateView
     } = this;
 
     return (
@@ -29,7 +42,11 @@ export class Page extends Component {
           />
         </div>
         <div style="flex-grow: 1; overflow: auto">
-          <Editor selectedFileName={selectedFileName} files={files} />
+          <Editor
+            selectedFileName={selectedFileName}
+            files={files}
+            getOrCreateView={getOrCreateView}
+          />
         </div>
       </div>
     );
