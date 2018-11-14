@@ -1,13 +1,14 @@
 import { h, Component } from 'preact';
-import { createView } from './demoView';
+import { createView } from '../../demoView';
 
 const getFile = (files, fileName) => files.find(file => file.name === fileName);
 
 const views = {};
 const getOrCreateView = selectedFile => {
   if (!views[selectedFile.name]) {
-    const text = selectedFile.text;
-    views[selectedFile.name] = createView({ text });
+    views[selectedFile.name] = createView({
+      doc: selectedFile.text
+    });
   }
   return views[selectedFile.name];
 };

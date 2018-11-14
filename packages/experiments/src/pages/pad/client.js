@@ -1,4 +1,4 @@
-import { createView } from './demoView';
+import { createView } from '../../demoView';
 import { hydrateEditor } from './hydrateEditor';
 import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';
 import { errorLog } from '../../client/errorLog';

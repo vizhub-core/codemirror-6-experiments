@@ -10,8 +10,8 @@ import {
   javascript
 } from '@datavis-tech/codemirror-6-prerelease';
 
-import { historyKeymap } from '../../client/historyKeymap';
-import { indentationKeymap } from '../../client/indentationKeymap';
+import { historyKeymap } from './client/historyKeymap';
+import { indentationKeymap } from './client/indentationKeymap';
 
 export const createView = options => {
   const { doc, otPlugin } = options;
@@ -27,9 +27,11 @@ export const createView = options => {
       matchBrackets({ decorationsPlugin: mode }),
       keymap(historyKeymap()),
       keymap(indentationKeymap(mode)),
-      keymap(baseKeymap),
-      otPlugin
+      keymap(baseKeymap)
     ]);
+    if (otPlugin) {
+      plugins = plugins.concat(otPlugin);
+    }
   }
 
   const state = EditorState.create({ doc, plugins });

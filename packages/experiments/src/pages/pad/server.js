@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { hydrateEditor } from './hydrateEditor';
-import { createView } from './demoView';
+import { createView } from '../../demoView';
 import { html } from './html';
 import { setServerRenderedData } from '../html';
 import { createDom } from '../../server/dom';
