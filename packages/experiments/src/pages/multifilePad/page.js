@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { RenderingTestSentinel } from '../../renderingTestSentinel';
+import { CodeMirrorShareDBBinding } from '../../client/codeMirrorShareDBBinding';
 import { DropdownMenu } from '../../dropdownMenu';
 import { Editor } from '../../editor';
 import { createView } from '../../demoView';
@@ -11,8 +12,26 @@ const presentShareDBDoc = shareDBDoc => ({
   files: shareDBDoc.data.files
 });
 
+const getFileIndex = (files, fileName) =>
+  files
+    .map((file, i) => ({ file, i }))
+    .find(({file}) => file.name === fileName)
+    .i;
+//
+//const getOrCreateView = shareDBDoc => function(files, fileName) {
+//  if (!this.views[fileName]) {
+//    //this.views[fileName] = CodeMirrorShareDBBinding({
+//    //  shareDBDoc,
+//    //  createView
+//    //});
+//  }
+//  return this.views[fileName];
+//};
+
 const getOrCreateView = function(files, fileName) {
   if (!this.views[fileName]) {
+    const fileIndex = getFileIndex(files, fileName);
+    console.log({fileIndex});
     this.views[fileName] = createView({
       doc: files.find(file => file.name === fileName).text
     });

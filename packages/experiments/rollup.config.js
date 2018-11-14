@@ -47,7 +47,6 @@ const server = {
   external: [
     'jsdom',
     '@teamwork/websocket-json-stream',
-    'codemirror-ot',
     'codemirror-theme-ubuntu',
     'd3-selection',
     'events',
