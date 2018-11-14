@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
-import { DropdownMenu } from './dropdownMenu';
-import { Editor } from './editor';
+import { DropdownMenu } from '../../dropdownMenu';
+import { Editor } from '../../editor';
 import { exampleFiles } from '../../exampleFiles';
 import { createView } from '../../demoView';
 

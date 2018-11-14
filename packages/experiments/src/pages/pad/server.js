@@ -4,19 +4,26 @@ import { createView } from '../../demoView';
 import { html } from './html';
 import { setServerRenderedData } from '../html';
 import { createDom } from '../../server/dom';
-import { getOrCreateDoc } from '../../server/getOrCreateDoc';
+import { fetchOrCreateShareDBDoc } from '../../server/fetchOrCreateShareDBDoc';
 
 const route = 'pad';
 const dom = createDom(html);
 const document = dom.window.document;
+
+const defaultData = `"use strict";
+const {readFile} = require("fs");
+readFile("package.json", "utf8", (err, data) => {
+  console.log(data);
+});`;
 
 export const server = connection => {
   const router = Router();
   router.get('/:id', (req, res) => {
     const { params } = req;
     const { id } = params;
+    const collection = 'examples';
 
-    getOrCreateDoc(connection, id).then(shareDBDoc => {
+    fetchOrCreateShareDBDoc({connection, id, collection, defaultData}).then(shareDBDoc => {
       global.document = document;
       const doc = shareDBDoc.data;
       hydrateEditor(createView({ doc }));

@@ -3,9 +3,9 @@ import { h, render } from 'preact';
 import { html } from './html';
 import { createDom } from '../../server/dom';
 import { setServerRenderedData } from '../html';
-import { fetchOrCreateShareDBDoc } from './fetchOrCreateShareDBDoc';
 import { defaultData } from './defaultData';
 import { createShareDBSnapshot } from '../../server/createShareDBSnapshot';
+import { fetchOrCreateShareDBDoc } from '../../fetchOrCreateShareDBDoc';
 import { Page } from './page';
 
 const route = 'multifilePad';
