@@ -24,7 +24,9 @@ export class Editor extends Component {
     const newView = getOrCreateView(files, selectedFileName);
     this.base.appendChild(newView.dom);
 
-    newView.dispatch(newView.state.transaction.scrollIntoView());
+    if (process.browser) {
+      newView.dispatch(newView.state.transaction.scrollIntoView());
+    }
 
     this.previouslySelectedFileName = selectedFileName;
   }
