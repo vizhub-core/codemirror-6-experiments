@@ -22,7 +22,11 @@ export const server = connection => {
 
     fetchOrCreateShareDBDoc({ connection, collection, id, defaultData }).then(
       shareDBDoc => {
-        render(<Page shareDBDoc={shareDBDoc} query={query} />, root, root.firstElementChild);
+        render(
+          <Page shareDBDoc={shareDBDoc} query={query} />,
+          root,
+          root.firstElementChild
+        );
         const shareDBSnapshot = createShareDBSnapshot(shareDBDoc);
         setServerRenderedData(dom, {
           route,

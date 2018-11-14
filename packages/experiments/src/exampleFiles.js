@@ -96,6 +96,6 @@ loadAndProcessData().then(countries => {
   },
   {
     name: 'foo.js',
-    text: 'export default \'I am foo\';'
+    text: "export default 'I am foo';"
   }
 ];

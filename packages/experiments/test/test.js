@@ -20,13 +20,14 @@ describe('vizhub-io', () => {
       );
     }
 
-    const url = ({id, file}) => [
-      'http://localhost:',
-      port,
-      '/multifilePad/',
-      id,
-      file ? `?file=${file}` : ''
-    ].join('');
+    const url = ({ id, file }) =>
+      [
+        'http://localhost:',
+        port,
+        '/multifilePad/',
+        id,
+        file ? `?file=${file}` : ''
+      ].join('');
 
     before(async function() {
       server = await startServer(port);
