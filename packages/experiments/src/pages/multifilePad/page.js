@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import { RenderingTestSentinel } from '../../renderingTestSentinel';
 import { DropdownMenu } from '../../dropdownMenu';
+export const defaultSelectedFileName = 'index.js';
 
 // Decouple shareDBDoc shape from page code.
 const presentShareDBDoc = shareDBDoc => ({
@@ -12,7 +13,7 @@ export class Page extends Component {
     super();
 
     // TODO get from params
-    this.state.selectedFileName = 'index.js';
+    this.state.selectedFileName = defaultSelectedFileName;
 
     this.setSelectedFileName = selectedFileName => {
       this.setState({ selectedFileName });
